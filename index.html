@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شبكة العنكبوت Al_Ankaboot - بليغ الجبري</title>
+<style>
+body{background:#050505;color:#FFD700;font-family:'Tajawal',sans-serif;padding:15px;margin:0}
+.card{background:#111;border:2px solid #8B4513;border-radius:12px;padding:15px;margin:10px 0}
+input,button{width:95%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #A0522D;background:#222;color:#FFD700;font-size:16px}
+button{background:linear-gradient(135deg,#8B4513,#A0522D);font-weight:bold;cursor:pointer}
+.hub{border:2px solid #8B4513;margin:10px 0;padding:15px;border-radius:10px;background:#1a1a1a}
+.user{display:flex;justify-content:space-between;align-items:center;padding:8px;background:#2a2a2a;margin:5px 0;border-radius:8px}
+.btn-kick{background:red;padding:5px 12px;border:none;border-radius:5px;color:white;cursor:pointer}
+.btn-kick.hidden{display:none}
+.status{color:#0f0;font-weight:bold}
+.header{text-align:center;margin-bottom:20px}
+.header img{width:80px;height:80px;border-radius:50%;border:3px solid #FFD700}
+#loginBox{display:block}
+#dashboard{display:none}
+.badge{float:left;background:green;padding:3px 10px;border-radius:5px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="header">
+  <img src="https://jabri-com.vercel.app/image/Baleegh2026.png">
+  <h1>🕸️ مدير شبكة العنكبوت</h1>
+  <h3>مطور بواسطة: بليغ الجبري</h3>
+</div>
+
+<!-- شاشة تسجيل الدخول -->
+<div id="loginBox" class="card">
+  <h2>تسجيل الدخول</h2>
+  <input id="ip" placeholder="IP الميكروتيك: 192.168.88.1" value="192.168.88.1">
+  <input id="user" placeholder="يوزر API - مثال: 771234567">
+  <input id="pass" type="password" placeholder="كلمة السر">
+  <button onclick="login()">دخول</button>
+  <p id="status"></p>
+</div>
+
+<!-- شاشة العنكبوت -->
+<div id="dashboard">
+  <button onclick="loadData()">🔄 تحديث</button>
+  <span id="role" class="badge"></span>
+  <div id="hubs"></div>
+</div>
+
+<script>
+const PROXY_URL = '/api'; // لو رفعت الملفين مع بعض في Qasis
+let CONFIG = {};
+let CAN_KICK = false;
+
+async function mikrotikCall(command, params={}){
+  const res = await fetch(PROXY_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ config: CONFIG, command, params })
+  });
+  if(!res.ok) throw new Error('فشل الاتصال بالبروكسي');
+  return await res.json();
+}
+
+async function login(){
+  document.getElementById('status').innerText = 'جاري الاتصال...';
+  CONFIG = {
+    host: document.getElementById('ip').value,
+    user: document.getElementById('user').value,
+    password: document.getElementById('pass').value
+  };
+  try {
+    const users = await mikrotikCall('/user/print', {".?name": CONFIG.user});
+    CAN_KICK = users[0].group === 'full' || users[0].group === 'write';
+    document.getElementById('role').innerText = CAN_KICK? 'مطور' : 'مراقب';
+
+    await mikrotikCall('/system/identity/print'); // اختبار
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadData();
+    setInterval(loadData, 5000);
+  }catch(e){
+    document.getElementById('status').innerText = 'فشل الاتصال: '+e.message;
+  }
+}
+
+async function loadData(){
+  const interfaces = await mikrotikCall('/interface/print');
+  const users = await mikrotikCall('/ip/hotspot/active/print');
+
+  let html = '';
+  interfaces.filter(i=>i.name.includes('Al_Ankaboot')).forEach(hub=>{
+    const hubUsers = users.filter(u=>u.interface === hub.name);
+    html += `<div class="hub"><h2>📡 ${hub.name} <span class="status">${hub.running==='true'?'🟢 شغال':'🔴 طافي'}</span></h2>`;
+    html += `<p>المستخدمين: ${hubUsers.length}</p>`;
+    hubUsers.forEach(u=>{
+      html += `<div class="user">
+        <span>👤 ${u.user} - ${u.address}</span>
+        <button class="btn-kick ${CAN_KICK? '' : 'hidden'}" onclick="kick('${u['.id']}')">فصل</button>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById('hubs').innerHTML = html || '<p>لا توجد محطات Al_Ankaboot</p>';
+}
+
+async function kick(id){
+  if(!CAN_KICK) return;
+  if(confirm('متأكد تريد فصل المستخدم؟')){
+    await mikrotikCall('/ip/hotspot/active/remove', {".id": id});
+    loadData();
+  }
+}
+</script>
+</body>
+</html>
