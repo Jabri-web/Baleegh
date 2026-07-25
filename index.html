@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🕸️ مدير شبكة العنكبوت - Al_Ankaboot</title>
+    <title>🕸️ مدير شبكة العنكبوت - AlAnkaboot_YE</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -97,15 +97,16 @@
             display: inline-block;
             background: linear-gradient(135deg, #8B4513, #A0522D);
             color: #fff;
-            padding: 10px 25px;
+            padding: 12px 25px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             margin-top: 10px;
             border: none;
             cursor: pointer;
+            font-size: 16px;
         }
-        .btn:hover { opacity: 0.8; }
+        .btn:hover { opacity: 0.9; transform: scale(1.05); }
         .footer {
             margin-top: 30px;
             text-align: center;
@@ -141,39 +142,37 @@
         <h2>📡 حالة نظام التحكم</h2>
         <p>البوت: <span class="badge online">🟢 يعمل (متصل)</span></p>
         <p>آخر تحديث: <span id="updateTime"></span></p>
-        <p>📌 <strong>ملاحظة:</strong> هذا النظام يعمل عبر <strong>بوت تليجرام</strong>، وليس عبر متصفح (تجاوزنا مشكلة CORS والبروكسي).</p>
+        <p>📌 <strong>ملاحظة:</strong> هذا النظام يعمل عبر <strong>بوت تليجرام</strong>، تجاوزنا مشكلة CORS والبروكسي.</p>
     </div>
 
     <!-- المعلومات الأساسية -->
     <div class="grid">
         <div class="card">
             <h3>🤖 رابط البوت</h3>
-            <p>للتحكم الفوري بالشبكة من هاتفك، ابحث عن البوت في تليجرام:</p>
-            <p><code>@Al_Ankaboot_Bot</code></p>
-            <a href="https://t.me/Al_Ankaboot_Bot" target="_blank" class="btn">🚀 افتح البوت</a>
+            <p>للتحكم الفوري بالشبكة من هاتفك، اضغط الزر:</p>
+            <p><code>@AlAnkaboot_YE_Bot</code></p>
+            <a href="https://t.me/AlAnkaboot_YE_Bot" target="_blank" class="btn">🚀 افتح البوت الان</a>
         </div>
         <div class="card">
             <h3>⚙️ متطلبات التشغيل</h3>
             <p>لتشغيل البوت على السيرفر:</p>
             <ul style="color:#ccc; list-style: none; padding: 0;">
-                <li>✅ Python 3.8+</li>
+                <li>✅ Python 3.10+</li>
                 <li>✅ مكتبة <code>routeros-api</code></li>
                 <li>✅ <code>python-telegram-bot</code></li>
                 <li>🔌 منفذ API في الميكروتيك: <code>8728</code></li>
             </ul>
         </div>
         <div class="card">
-            <h3>📋 الأوامر المتاحة (الأزرار)</h3>
+            <h3>📋 الأوامر المتاحة</h3>
             <div class="command-list">
-                📡 عرض الهوبات<br>
-                👥 مستخدمي هوب معين<br>
-                ⚡ فصل مستخدم<br>
-                ⏹️ إيقاف هوب<br>
-                ▶️ تشغيل هوب<br>
-                📊 حركة الهوب<br>
-                🔐 تسجيل الدخول<br>
-                ℹ️ الحالة<br>
-                ❌ خروج
+                /start - بدء التشغيل<br>
+                IP user pass - تسجيل الدخول للميكروتيك<br>
+                /hotspots - عرض الهوبات<br>
+                /users - مستخدمي هوب معين<br>
+                /disconnect - فصل مستخدم<br>
+                /status - حالة النظام<br>
+                /logout - تسجيل الخروج
             </div>
         </div>
         <div class="card">
@@ -190,17 +189,11 @@
     <div class="card" style="margin-top:15px; background:#0a0a0a;">
         <h3>📖 دليل الاستخدام السريع</h3>
         <ol style="color:#ddd; padding-right: 20px; line-height: 2;">
-            <li><strong>تسجيل الدخول:</strong> اضغط زر "تسجيل الدخول" وأدخل <code>IP</code>، <code>يوزر</code>، <code>كلمة السر</code>.</li>
-            <li><strong>استعراض:</strong> اضغط "عرض الهوبات" لرؤية جميع نقاط الشبكة (Al_Ankaboot).</li>
-            <li><strong>التحكم:</strong> اختر الهوب المطلوب لعرض مستخدميه، أو إيقافه/تشغيله، أو مراقبة حركته.</li>
+            <li><strong>تسجيل الدخول:</strong> اضغط "افتح البوت" وارسل: <code>IP username password</code></li>
+            <li><strong>استعراض:</strong> بعد الاتصال اضغط "عرض الهوبات" لرؤية جميع نقاط الشبكة.</li>
+            <li><strong>التحكم:</strong> اختر الهوب المطلوب لعرض مستخدميه، أو إيقافه/تشغيله.</li>
             <li><strong>الفصل:</strong> انسخ الـ <code>.id</code> من قائمة المستخدمين واستخدم زر "فصل".</li>
         </ol>
-    </div>
-
-    <!-- تنزيل الكود -->
-    <div style="text-align:center; margin-top:25px;">
-        <a href="#" class="btn" style="background: #2a2a2a; border:1px solid #FFD700;">📥 تنزيل البوت (bot.py)</a>
-        <a href="#" class="btn" style="background: #2a2a2a; border:1px solid #FFD700;">📥 تنزيل المتطلبات (requirements.txt)</a>
     </div>
 
     <div class="footer">
@@ -210,7 +203,7 @@
 
 <script>
     // عرض وقت التحديث
-    document.getElementById('updateTime').innerText = new Date().toLocaleString('ar-EG');
+    document.getElementById('updateTime').innerText = new Date().toLocaleString('ar-YE');
 </script>
 </body>
 </html>
