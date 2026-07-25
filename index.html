@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>شبكة العنكبوت Al_Ankaboot - بليغ عبدالله الجبري</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body{background:#050505;color:#FFD700;font-family:'Tajawal',sans-serif;padding:15px;margin:0}
+ body{background:#050505;color:#FFD700;font-family:'Tajawal',sans-serif;padding:15px;margin:0}
 .card{background:#111;border:2px solid #8B4513;border-radius:12px;padding:15px;margin:10px 0}
-input,button{width:95%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #A0522D;background:#222;color:#FFD700;font-size:16px}
-button{background:linear-gradient(135deg,#8B4513,#A0522D);font-weight:bold;cursor:pointer}
+ input,button{width:95%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #A0522D;background:#222;color:#FFD700;font-size:16px}
+ button{background:linear-gradient(135deg,#8B4513,#A0522D);font-weight:bold;cursor:pointer}
 .hub{border:2px solid #8B4513;margin:10px 0;padding:15px;border-radius:10px;background:#1a1a1a}
 .user{display:flex;justify-content:space-between;align-items:center;padding:8px;background:#2a2a2a;margin:5px 0;border-radius:8px}
 .btn-kick{background:red;padding:5px 12px;border:none;border-radius:5px;color:white;cursor:pointer}
@@ -16,19 +17,19 @@ button{background:linear-gradient(135deg,#8B4513,#A0522D);font-weight:bold;curso
 .status{color:#0f0;font-weight:bold}
 .header{text-align:center;margin-bottom:20px}
 .header img{width:80px;height:80px;border-radius:50%;border:3px solid #FFD700}
-#loginBox{display:block}
-#dashboard{display:none}
+ #loginBox{display:block}
+ #dashboard{display:none}
 .badge{float:left;background:green;padding:3px 10px;border-radius:5px;font-size:12px}
+.footer{text-align:center;margin-top:20px;font-size:18px}
 </style>
 </head>
 <body>
 <div class="header">
-  <img src="image/Baleegh2026.png">
+  <img src="https://jabri-com.vercel.app/image/Baleegh2026.png">
   <h1>🕸️ مدير شبكة العنكبوت</h1>
-  <h3>مطور بواسطة: بليغ الجبري</h3>
+  <h3>مطور بواسطة: بليغ عبدالله الجبري</h3>
 </div>
 
-<!-- شاشة تسجيل الدخول -->
 <div id="loginBox" class="card">
   <h2>تسجيل الدخول</h2>
   <input id="ip" placeholder="IP الميكروتيك: 192.168.88.1" value="192.168.88.1">
@@ -38,22 +39,24 @@ button{background:linear-gradient(135deg,#8B4513,#A0522D);font-weight:bold;curso
   <p id="status"></p>
 </div>
 
-<!-- شاشة العنكبوت -->
 <div id="dashboard">
   <button onclick="loadData()">🔄 تحديث</button>
   <span id="role" class="badge"></span>
   <div id="hubs"></div>
 </div>
 
+<div class="footer">
+  🇾🇪 <a href="second.html" target="_blank" style="color:#FFD700">البرنامج الثاني</a><
+  🇾🇪 <a href="https://jabri-com.vercel.app/" target="_blank" style="color:#FFA700">العودة للواحة</a></div>
+
 <script>
-const PROXY_URL = '/api'; // لو رفعت الملفين مع بعض في Qasis
+const PROXY_URL = '/api';
 let CONFIG = {};
 let CAN_KICK = false;
 
 async function mikrotikCall(command, params={}){
   const res = await fetch(PROXY_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ config: CONFIG, command, params })
   });
   if(!res.ok) throw new Error('فشل الاتصال بالبروكسي');
@@ -62,17 +65,12 @@ async function mikrotikCall(command, params={}){
 
 async function login(){
   document.getElementById('status').innerText = 'جاري الاتصال...';
-  CONFIG = {
-    host: document.getElementById('ip').value,
-    user: document.getElementById('user').value,
-    password: document.getElementById('pass').value
-  };
+  CONFIG = { host: document.getElementById('ip').value, user: document.getElementById('user').value, password: document.getElementById('pass').value };
   try {
     const users = await mikrotikCall('/user/print', {".?name": CONFIG.user});
     CAN_KICK = users[0].group === 'full' || users[0].group === 'write';
     document.getElementById('role').innerText = CAN_KICK? 'مطور' : 'مراقب';
-
-    await mikrotikCall('/system/identity/print'); // اختبار
+    await mikrotikCall('/system/identity/print');
     document.getElementById('loginBox').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     loadData();
@@ -85,17 +83,13 @@ async function login(){
 async function loadData(){
   const interfaces = await mikrotikCall('/interface/print');
   const users = await mikrotikCall('/ip/hotspot/active/print');
-
   let html = '';
   interfaces.filter(i=>i.name.includes('Al_Ankaboot')).forEach(hub=>{
     const hubUsers = users.filter(u=>u.interface === hub.name);
     html += `<div class="hub"><h2>📡 ${hub.name} <span class="status">${hub.running==='true'?'🟢 شغال':'🔴 طافي'}</span></h2>`;
     html += `<p>المستخدمين: ${hubUsers.length}</p>`;
     hubUsers.forEach(u=>{
-      html += `<div class="user">
-        <span>👤 ${u.user} - ${u.address}</span>
-        <button class="btn-kick ${CAN_KICK? '' : 'hidden'}" onclick="kick('${u['.id']}')">فصل</button>
-      </div>`;
+      html += `<div class="user"> <span>👤 ${u.user} - ${u.address}</span> <button class="btn-kick ${CAN_KICK? '' : 'hidden'}" onclick="kick('${u['.id']}')">فصل</button> </div>`;
     });
     html += `</div>`;
   });
@@ -110,9 +104,5 @@ async function kick(id){
   }
 }
 </script>
-
-  
-🇾🇪 <a href="https://jabri-com.vercel.app/" target="_blnck"> الواحة</a>
-
 </body>
 </html>
