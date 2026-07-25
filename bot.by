@@ -1,131 +1,59 @@
-import os, logging, io
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, ContextTypes, CallbackQueryHandler
-from routeros_api import RouterOsApiPool
+import os
+import logging
 from dotenv import load_dotenv
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+from routeros_api import RouterOsApiPool
+
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO)
-user_data_store = {}
-# 1. مهم: حط ايديك هنا
-ALLOWED_USERS = [123456789]
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+ALLOWED_USERS = [int(x) for x in os.getenv("ALLOWED_USERS", "").split(",") if x]
 
-def check_auth(user_id): return user_id in ALLOWED_USERS
-def get_api(chat_id): return user_data_store.get(chat_id, {}).get('api')
-
-def main_menu():
-keyboard = [
-[InlineKeyboardButton("📡 عرض الهوبات", callback_data='hubs')],
-[InlineKeyboardButton("👥 المستخدمين النشطين", callback_data='hotspot_active')],
-[InlineKeyboardButton("📋 كل المستخدمين المسجلين", callback_data='hotspot_users')],
-[InlineKeyboardButton("📊 حالة الميكروتيك", callback_data='status')],
-[InlineKeyboardButton("🔄 تحديث", callback_data='refresh')],
-[InlineKeyboardButton("💀 فصل الكل", callback_data='kick_all')]
-]
-return InlineKeyboardMarkup(keyboard)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+user_data = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-if not check_auth(update.effective_user.id): return await update.message.reply_text("⛔ غير مصرح")
-await update.message.reply_text("🕸️ *مرحبا بمدير شبكة العنكبوت*\nسجل الدخول اول:", reply_markup=main_menu(), parse_mode='Markdown')
+    if update.effective_user.id not in ALLOWED_USERS:
+        await update.message.reply_text("❌ غير مصرح لك باستخدام البوت")
+        return
+    await update.message.reply_text(
+        "🕸️ مرحبا بك في بوت شبكة العنكبوت\n"
+        "ارسل بيانات الميكروتيك بهذا الشكل:\n"
+        "`IP username password`",
+        parse_mode='Markdown'
+    )
 
-async def setip(update: Update, context: ContextTypes.DEFAULT_TYPE):
-if not check_auth(update.effective_user.id): return
-user_data_store.setdefault(update.effective_chat.id, {})['host'] = context.args[0]
-await update.message.reply_text(f"✅ IP: {context.args[0]}")
+def connect_mikrotik(ip, username, password):
+    try:
+        pool = RouterOsApiPool(ip, username=username, password=password, plaintext_login=True)
+        api = pool.get_api()
+        return api, pool
+    except Exception as e:
+        return None, str(e)
 
-async def setuser(update: Update, context: ContextTypes.DEFAULT_TYPE):
-if not check_auth(update.effective_user.id): return
-user_data_store.setdefault(update.effective_chat.id, {})['user'] = context.args[0]
-await update.message.reply_text(f"✅ User: {context.args[0]}")
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id not in ALLOWED_USERS:
+        return
+    
+    text = update.message.text
+    parts = text.split()
+    
+    if len(parts) == 3:
+        ip, user, pw = parts
+        user_data[update.effective_user.id] = {'ip': ip, 'user': user, 'pw': pw}
+        api, err = connect_mikrotik(ip, user, pw)
+        if api:
+            await update.message.reply_text("✅ تم الاتصال بالميكروتيك بنجاح")
+            api.get_pool().disconnect()
+        else:
+            await update.message.reply_text(f"❌ فشل الاتصال: {err}")
+    else:
+        await update.message.reply_text("الصيغة خطأ. ارسل: `IP username password`", parse_mode='Markdown')
 
-async def setpass(update: Update, context: ContextTypes.DEFAULT_TYPE):
-if not check_auth(update.effective_user.id): return
-user_data_store.setdefault(update.effective_chat.id, {})['pass'] = context.args[0]
-await update.message.reply_text("✅ Password تم")
+app = ApplicationBuilder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-async def login(update: Update, context: ContextTypes.DEFAULT_TYPE):
-if not check_auth(update.effective_user.id): return
-chat_id = update.effective_chat.id; data = user_data_store.get(chat_id, {})
-try:
-pool = RouterOsApiPool(data['host'], username=data['user'], password=data['pass'], plaintext_login=True, port=8728)
-api = pool.get_api()
-identity = api.get_resource('/system/identity').get()[0]['name']
-user_data_store[chat_id]['api'] = api
-await update.message.reply_text(f"✅ متصل بـ: {identity}", reply_markup=main_menu())
-except Exception as e: await update.message.reply_text(f"❌ فشل: {e}")
-
-async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
-query = update.callback_query; await query.answer()
-api = get_api(query.message.chat_id)
-if not api and query.data not in ['refresh','status']: return await query.edit_message_text("❌ سجل دخول اول: /login")
-
-if query.data == 'refresh': await query.edit_message_text("🕸️ القائمة الرئيسية", reply_markup=main_menu()) # تم اصلاحه
-elif query.data == 'status':
-identity = api.get_resource('/system/identity').get()[0]['name']
-await query.edit_message_text(f"✅ متصل بـ: {identity}", reply_markup=main_menu())
-
-elif query.data == 'hubs':
-interfaces = api.get_resource('/interface').get(name='Al_Ankaboot*')
-keyboard = []
-for i in interfaces:
-status = '🟢' if i['running']=='true' else '🔴'
-keyboard.append([InlineKeyboardButton(f"{status} {i['name']}", callback_data=f"hub_{i['name']}")])
-keyboard.append([InlineKeyboardButton(f"⏹️ ايقاف {i['name']}", callback_data=f"disable_{i['name']}"),
-InlineKeyboardButton(f"▶️ تشغيل {i['name']}", callback_data=f"enable_{i['name']}"),
-InlineKeyboardButton(f"📊 سرعة", callback_data=f"traffic_{i['name']}")]) # تمت الاضافة
-keyboard.append([InlineKeyboardButton("🔙 رجوع", callback_data='refresh')])
-await query.edit_message_text("📡 اختر هوب:", reply_markup=InlineKeyboardMarkup(keyboard))
-
-elif query.data.startswith('disable_'):
-iface = query.data.split('_',1)[1]
-api.get_resource('/interface').set(name=iface, disabled='yes')
-await query.edit_message_text(f"✅ تم ايقاف {iface}", reply_markup=main_menu())
-
-elif query.data.startswith('enable_'):
-iface = query.data.split('_',1)[1]
-api.get_resource('/interface').set(name=iface, disabled='no')
-await query.edit_message_text(f"✅ تم تشغيل {iface}", reply_markup=main_menu())
-
-elif query.data.startswith('traffic_'): # مراقبة السرعة - تمت الاضافة
-iface = query.data.split('_',1)[1]
-res = api.get_resource('/interface/monitor-traffic').call('monitor-traffic', {'interface': iface, 'once': ''})
-rx = int(res[0]['rx-bits-per-second'])/1000
-tx = int(res[0]['tx-bits-per-second'])/1000
-await query.edit_message_text(f"📊 `{iface}`\n⬇️ {rx:.1f} kbps\n⬆️ {tx:.1f} kbps", reply_markup=main_menu(), parse_mode='Markdown')
-
-elif query.data.startswith('hub_'):
-iface = query.data.split('_',1)[1]
-users = api.get_resource('/ip/hotspot/active').get(interface=iface)
-msg = f"👥 {iface}\n" + '\n'.join([f"{u['user']} - {u['address']} - ID:`{u['.id']}`" for u in users]) if users else "فاضي"
-keyboard = [[InlineKeyboardButton(f"🔴 فصل {u['user']}", callback_data=f"kick_{u['.id']}")] for u in users]
-keyboard.append([InlineKeyboardButton("🔙 رجوع", callback_data='hubs')])
-await query.edit_message_text(msg, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='Markdown')
-
-elif query.data == 'hotspot_active':
-users = api.get_resource('/ip/hotspot/active').get()
-msg = '\n'.join([f"{u['user']} - {u['address']} - {u['interface']}" for u in users]) or "لا يوجد"
-await query.edit_message_text(msg, reply_markup=main_menu())
-
-elif query.data == 'hotspot_users':
-users = api.get_resource('/ip/hotspot/user').get()
-msg = '\n'.join([f"{u['name']} - الباقة:{u['profile']}" for u in users]) or "لا يوجد"
-await query.edit_message_text(msg, reply_markup=main_menu())
-
-elif query.data == 'kick_all': # فصل الكل - تمت الاضافة
-users = api.get_resource('/ip/hotspot/active').get()
-for u in users: api.get_resource('/ip/hotspot/active').remove(id=u['.id'])
-await query.edit_message_text(f"💀 تم فصل {len(users)} مستخدم", reply_markup=main_menu())
-
-elif query.data.startswith('kick_'):
-api.get_resource('/ip/hotspot/active').remove(id=query.data.split('_',1)[1])
-await query.edit_message_text("✅ تم الفصل", reply_markup=main_menu())
-
-def main():
-TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-app = Application.builder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start)); app.add_handler(CommandHandler("setip", setip))
-app.add_handler(CommandHandler("setuser", setuser)); app.add_handler(CommandHandler("setpass", setpass))
-app.add_handler(CommandHandler("login", login)); app.add_handler(CallbackQueryHandler(button))
-print("🤖 البوت شغال..."); app.run_polling()
-
-if __name__ == "__main__": main()
+print("✅ البوت شغال")
+app.run_polling()
