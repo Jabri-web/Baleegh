@@ -1,103 +1,231 @@
-# bot.py (النسخة المطورة)
-import os, logging
+# bot.py - النسخة المطابقة لـ @AlAnkaboot_YE_Bot
+import os
+import logging
 from dotenv import load_dotenv
-from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
+from telegram import Update, ReplyKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from routeros_api import RouterOsApiPool
 
 load_dotenv()
+
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 ALLOWED_USERS = [int(x) for x in os.getenv("ALLOWED_USERS", "").split(",") if x]
-logging.basicConfig(level=logging.INFO)
 
-# تخزين جلسات المستخدمين (مؤقت)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+# تخزين جلسات المستخدمين
 sessions = {}
 
-def connect(ip, user, pw):
-    try:
-        pool = RouterOsApiPool(ip, username=user, password=pw, plaintext_login=True, port=8728)
-        api = pool.get_api()
-        return api, pool
-    except Exception as e:
-        return None, str(e)
-
-# لوحة المفاتيح الرئيسية
+# لوحة المفاتيح الرئيسية (أزرار تفاعلية)
 main_keyboard = ReplyKeyboardMarkup([
-    ['📡 عرض الهوبات', '👥 مستخدمين هوب'],
+    ['📡 عرض الهوبات', '👥 مستخدمين الهوب'],
     ['⚡ فصل مستخدم', '⏹️ إيقاف هوب'],
     ['▶️ تشغيل هوب', '📊 حركة الهوب'],
     ['🔐 تسجيل الدخول', 'ℹ️ الحالة']
 ], resize_keyboard=True)
 
-async def start(update: Update, context):
+def connect_mikrotik(ip, username, password):
+    try:
+        pool = RouterOsApiPool(ip, username=username, password=password, plaintext_login=True, port=8728)
+        api = pool.get_api()
+        return api, pool
+    except Exception as e:
+        return None, str(e)
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     uid = update.effective_user.id
     if uid not in ALLOWED_USERS:
-        await update.message.reply_text("❌ غير مصرح")
+        await update.message.reply_text("❌ غير مصرح لك باستخدام هذا البوت")
         return
+    
     sessions[uid] = {}  # تهيئة الجلسة
+    
     await update.message.reply_text(
-        "🕸️ مرحبا في بوت شبكة العنكبوت\n"
-        "اضغط 'تسجيل الدخول' لإدخال بيانات الميكروتيك، أو استخدم الأزرار.",
+        f"🕸️ مرحبا بك في بوت **شبكة العنكبوت** الرسمي\n"
+        f"📌 البوت: @AlAnkaboot_YE_Bot\n\n"
+        "🔑 **لبدء التحكم بالشبكة:**\n"
+        "أرسل بيانات دخول الميكروتيك بهذا الشكل:\n"
+        "`IP username password`\n\n"
+        "🟢 بعد تسجيل الدخول، استخدم الأزرار أدناه أو الأوامر التالية:\n"
+        "▪️ /hotspots - عرض جميع الهوبات\n"
+        "▪️ /disconnect - فصل مستخدم\n"
+        "▪️ /status - حالة البوت",
+        parse_mode='Markdown',
         reply_markup=main_keyboard
     )
 
-async def login(update: Update, context):
+async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     uid = update.effective_user.id
-    await update.message.reply_text("أرسل بيانات الدخول: `IP username password`", parse_mode='Markdown')
-
-async def handle_text(update: Update, context):
-    uid = update.effective_user.id
-    text = update.message.text
-
-    # 1. معالجة تسجيل الدخول
-    if len(text.split()) == 3 and text.count(' ') == 2:
-        ip, user, pw = text.split()
-        api, err = connect(ip, user, pw)
+    if uid not in ALLOWED_USERS:
+        return
+    
+    text = update.message.text.strip()
+    parts = text.split()
+    
+    # 1. معالجة تسجيل الدخول (IP user pass)
+    if len(parts) == 3 and text.count(' ') == 2:
+        ip, user, pw = parts
+        api, err = connect_mikrotik(ip, user, pw)
         if api:
-            sessions[uid] = {'ip': ip, 'user': user, 'pw': pw, 'api': api, 'pool': None} # حذفنا الpool للتبسيط
-            await update.message.reply_text("✅ تم الاتصال!", reply_markup=main_keyboard)
+            sessions[uid] = {'ip': ip, 'user': user, 'pw': pw}
+            await update.message.reply_text(
+                "✅ تم الاتصال بالميكروتيك بنجاح!",
+                reply_markup=main_keyboard
+            )
         else:
-            await update.message.reply_text(f"❌ فشل: {err}")
+            await update.message.reply_text(f"❌ فشل الاتصال: {err}")
         return
-
-    # 2. معالجة الأزرار (الأوامر)
+    
+    # 2. معالجة الأزرار (بدلاً من الأوامر النصية)
     if uid not in sessions or 'ip' not in sessions[uid]:
-        await update.message.reply_text("⚠️ سجل الدخول أولاً باستخدام 'تسجيل الدخول'")
+        await update.message.reply_text("⚠️ سجل الدخول أولاً بإرسال `IP username password`", parse_mode='Markdown')
         return
-
-    api, err = connect(sessions[uid]['ip'], sessions[uid]['user'], sessions[uid]['pw'])
+    
+    # إعادة الاتصال في كل أمر (لتجنب انتهاء الجلسة)
+    api, err = connect_mikrotik(sessions[uid]['ip'], sessions[uid]['user'], sessions[uid]['pw'])
     if not api:
-        await update.message.reply_text(f"❌ فقد الاتصال: {err}")
+        await update.message.reply_text(f"❌ فشل الاتصال بالميكروتيك: {err}")
         return
-
-    if text == '📡 عرض الهوبات':
-        # مثال: جلب الـ Interfaces
-        result = api.get_resource('/interface').get()
-        msg = "📡 الهوبات:\n" + "\n".join([f"{r.get('name')} -> {r.get('running')}" for r in result[:10]])
-        await update.message.reply_text(msg)
     
-    elif text == '👥 مستخدمين هوب':
-        # مثال: جلب مستخدمي الـ Hotspot
-        result = api.get_resource('/ip/hotspot/host').get()
-        msg = "👥 المستخدمون:\n" + "\n".join([f"{r.get('user')} - {r.get('address')}" for r in result[:10]])
-        await update.message.reply_text(msg)
+    try:
+        if text == '📡 عرض الهوبات':
+            interfaces = api.get_resource('/interface').get()
+            msg = "📡 **قائمة الهوبات:**\n"
+            for iface in interfaces[:15]:  # عرض أول 15
+                name = iface.get('name', '')
+                running = iface.get('running', 'false')
+                status = "🟢 يعمل" if running == "true" else "🔴 متوقف"
+                msg += f"- {name} : {status}\n"
+            await update.message.reply_text(msg, parse_mode='Markdown')
+        
+        elif text == '👥 مستخدمين الهوب':
+            try:
+                hosts = api.get_resource('/ip/hotspot/host').get()
+                if hosts:
+                    msg = "👥 **مستخدمي الهوت سبوت النشطين:**\n"
+                    for h in hosts[:10]:
+                        user_name = h.get('user', 'غير معروف')
+                        address = h.get('address', '')
+                        msg += f"- {user_name} ({address})\n"
+                    await update.message.reply_text(msg, parse_mode='Markdown')
+                else:
+                    await update.message.reply_text("📭 لا يوجد مستخدمين نشطين حالياً.")
+            except:
+                await update.message.reply_text("⚠️ الهوت سبوت غير مفعل على هذا الجهاز.")
+        
+        elif text == '⚡ فصل مستخدم':
+            await update.message.reply_text(
+                "🔌 أرسل الـ `.id` الخاص بالمستخدم الذي تريد فصله.\n"
+                "لعرض الـ .id استخدم زر '👥 مستخدمين الهوب'.\n"
+                "مثال: `.id=*1`"
+            )
+        
+        elif text == '⏹️ إيقاف هوب':
+            await update.message.reply_text("⏳ جارٍ إيقاف الهوب... (ستضاف هذه الميزة قريباً)")
+        
+        elif text == '▶️ تشغيل هوب':
+            await update.message.reply_text("⏳ جارٍ تشغيل الهوب... (ستضاف هذه الميزة قريباً)")
+        
+        elif text == '📊 حركة الهوب':
+            await update.message.reply_text("📊 سيتم عرض حركة المرور قريباً...")
+        
+        elif text == '🔐 تسجيل الدخول':
+            await update.message.reply_text("أرسل بيانات الدخول: `IP username password`", parse_mode='Markdown')
+        
+        elif text == 'ℹ️ الحالة':
+            await update.message.reply_text(
+                f"🕸️ **شبكة العنكبوت**\n"
+                f"🤖 البوت: @AlAnkaboot_YE_Bot\n"
+                f"📡 متصل بـ: {sessions[uid]['ip']}\n"
+                f"👤 المستخدم: {sessions[uid]['user']}"
+            )
+    except Exception as e:
+        await update.message.reply_text(f"❌ حدث خطأ: {e}")
+    finally:
+        try:
+            api.get_resource('/').call('quit')
+        except:
+            pass
+
+async def handle_disconnect_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """معالجة رسالة .id= لفصل المستخدم"""
+    uid = update.effective_user.id
+    if uid not in ALLOWED_USERS or uid not in sessions or 'ip' not in sessions[uid]:
+        return
     
-    # ... باقي الأوامر (فصل، إيقاف، تشغيل) تضيفها بنفس المنطق
+    text = update.message.text.strip()
+    if not text.startswith('.id='):
+        return
+    
+    id_value = text.replace('.id=', '').strip()
+    if not id_value:
+        await update.message.reply_text("❌ الـ .id غير صحيح")
+        return
+    
+    api, err = connect_mikrotik(sessions[uid]['ip'], sessions[uid]['user'], sessions[uid]['pw'])
+    if not api:
+        await update.message.reply_text(f"❌ فشل الاتصال: {err}")
+        return
+    
+    try:
+        resource = api.get_resource('/ip/hotspot/host')
+        found = resource.get(id=id_value)
+        if found:
+            resource.remove(id=id_value)
+            await update.message.reply_text(f"✅ تم فصل المستخدم ذو الـ .id = {id_value}")
+        else:
+            await update.message.reply_text(f"❌ لم يتم العثور على مستخدم بهذا الـ .id")
+    except Exception as e:
+        await update.message.reply_text(f"❌ فشل الفصل: {e}")
+    finally:
+        try:
+            api.get_resource('/').call('quit')
+        except:
+            pass
 
-    api.get_resource('/').call('quit') # إغلاق الاتصال بعد كل أمر
+async def hotspots(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """الأمر /hotspots"""
+    await handle_text(update, context)  # إعادة استخدام منطق الزر
 
-async def handle_callback(update: Update, context):
-    # للتعامل مع الأزرار المضمنة (اختياري)
-    query = update.callback_query
-    await query.answer()
-    # منطقك هنا
+async def disconnect(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """الأمر /disconnect"""
+    uid = update.effective_user.id
+    if uid not in ALLOWED_USERS:
+        return
+    await update.message.reply_text(
+        "🔌 أرسل الـ `.id` الخاص بالمستخدم.\n"
+        "مثال: `.id=*1`"
+    )
+
+async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """الأمر /status"""
+    uid = update.effective_user.id
+    if uid not in ALLOWED_USERS:
+        return
+    if uid in sessions and 'ip' in sessions[uid]:
+        await update.message.reply_text(
+            f"🟢 البوت يعمل\n"
+            f"📡 متصل بـ: {sessions[uid]['ip']}"
+        )
+    else:
+        await update.message.reply_text("🟢 البوت يعمل، لكن لم يتم تسجيل الدخول بعد.")
 
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
+    
+    # الأوامر
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("hotspots", hotspots))
+    app.add_handler(CommandHandler("disconnect", disconnect))
+    app.add_handler(CommandHandler("status", status))
+    
+    # معالجة النصوص (الأزرار وتسجيل الدخول)
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
-    app.add_handler(CallbackQueryHandler(handle_callback))
-    print("✅ البوت شغال...")
+    
+    # معالجة خاصة لفصل المستخدم (.id=)
+    app.add_handler(MessageHandler(filters.Regex(r'^\.id='), handle_disconnect_text))
+    
+    print("✅ بوت @AlAnkaboot_YE_Bot شغال وجاهز!")
     app.run_polling()
 
 if __name__ == '__main__':
