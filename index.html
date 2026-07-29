@@ -10,6 +10,7 @@
   <meta name="keywords" content="ميكروتيك, إدارة الشبكات, بوت تليجرام, شبكة العنكبوت, MikroTik, VPN, bandwidth management, بليغ الجبري, واحة الجبري" />
   <meta name="author" content="بليغ عبدالله الجبري" />
   <link rel="canonical" href="https://baleegh.vercel.app/" />
+  <link rel="alternate" hreflang="en" href="https://baleegh.vercel.app/en-page.html" />
   <link rel="alternate" hreflang="ar" href="https://baleegh.vercel.app/" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -21,7 +22,7 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- البيانات المنظمة (Schema.org) مع ربط بالواحة -->
+  <!-- البيانات المنظمة (Schema.org) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -49,10 +50,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet" />
 
   <style>
-    /* ===== الأنماط كالسابق مع إضافة تنسيق للواحة ===== */
+    /* ===== الأنماط + زر اللغة ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0a; color: #FFD700; font-family: 'Tajawal', sans-serif; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-    .container { max-width: 900px; width: 100%; background: #111; border: 2px solid #8B4513; border-radius: 20px; padding: 30px; box-shadow: 0 0 40px rgba(139, 69, 19, 0.3); }
+    
+    /* زر اللغة (ثابت في الأعلى) */
+    .lang-btn { position: fixed; top: 20px; left: 20px; background: #FFD700; border: none; color: #0a0a0a; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; z-index: 999; text-decoration: none; font-family: 'Tajawal', sans-serif; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+    .lang-btn:hover { background: #fff; transform: scale(1.05); }
+
+    .container { max-width: 900px; width: 100%; background: #111; border: 2px solid #8B4513; border-radius: 20px; padding: 30px; box-shadow: 0 0 40px rgba(139, 69, 19, 0.3); margin-top: 40px; }
     
     header { text-align: center; border-bottom: 2px solid #8B4513; padding-bottom: 20px; margin-bottom: 25px; }
     header img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FFD700; margin-bottom: 10px; }
@@ -78,7 +84,6 @@
 
     .command-list { background: #0d0d0d; padding: 15px; border-radius: 10px; font-family: monospace; direction: ltr; text-align: left; color: #0f0; }
 
-    /* الفوتر المطور */
     footer { margin-top: 30px; text-align: center; color: #666; border-top: 1px solid #222; padding-top: 20px; font-size: 0.9rem; }
     footer a { color: #FFD700; text-decoration: none; margin: 0 8px; }
     footer .oasis-banner { background: #1a1a1a; border: 1px solid #8B4513; border-radius: 12px; padding: 15px; margin: 15px 0; }
@@ -87,6 +92,9 @@
   </style>
 </head>
 <body>
+
+<!-- ===== زر اللغة ===== -->
+<a href="en-page.html" class="lang-btn">🇬🇧 English</a>
 
 <div class="container">
 
@@ -146,7 +154,7 @@
       </div>
     </div>
 
-    <!-- ===== إضافة قسم للواحة داخل المحتوى ===== -->
+    <!-- قسم الواحة -->
     <div class="card" style="margin-top:15px; background:#0a0a0a; border-color:#8B4513;">
       <h3>🏛️ واحة الجبري – تراث اليمن العريق</h3>
       <p style="color:#ddd;">
@@ -173,8 +181,6 @@
 
   <!-- ===== الفوتر ===== -->
   <footer role="contentinfo">
-
-    <!-- بانر الواحة داخل الفوتر -->
     <div class="oasis-banner">
       <p style="color:#ccc; font-size:0.95rem;">
         🏛️ هذا المشروع جزء من منظومة <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; font-weight:bold;">واحة الجبري</a>
