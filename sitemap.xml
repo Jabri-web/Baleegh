@@ -10,4 +10,10 @@
     <lastmod>2026-07-30</lastmod>
     <priority>0.8</priority>
   </url>
+  <!-- رابط خارجي للواحة (ليس أساسياً لكنه مفيد) -->
+  <url>
+    <loc>https://jabri-com.vercel.app/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <priority>0.9</priority>
+  </url>
 </urlset>
