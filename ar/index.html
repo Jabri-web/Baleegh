@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO الأساسي -->
+  <title>شبكة العنكبوت | نظام إدارة شبكات الميكروتيك عن بعد</title>
+  <meta name="description" content="شبكة العنكبوت - نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. حلول متكاملة في إدارة الشبكات والاتصالات، بالتعاون مع واحة الجبري للبحث العلمي." />
+  <meta name="keywords" content="ميكروتيك, إدارة الشبكات, بوت تليجرام, شبكة العنكبوت, MikroTik, VPN, bandwidth management, بليغ الجبري, واحة الجبري" />
+  <meta name="author" content="بليغ عبدالله الجبري" />
+  <link rel="canonical" href="https://baleegh.vercel.app/" />
+  <link rel="alternate" hreflang="en" href="https://baleegh.vercel.app/en-page.html" />
+  <link rel="alternate" hreflang="ar" href="https://baleegh.vercel.app/" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="شبكة العنكبوت | نظام إدارة شبكات الميكروتيك" />
+  <meta property="og:description" content="نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. بالتعاون مع واحة الجبري للبحث العلمي والتراث اليمني." />
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Baleegh2026.png" />
+  <meta property="og:url" content="https://baleegh.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- البيانات المنظمة (Schema.org) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [{
+        "@type": "WebApplication",
+        "name": "شبكة العنكبوت",
+        "description": "نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام، بالتعاون مع واحة الجبري للبحث العلمي.",
+        "url": "https://baleegh.vercel.app/",
+        "author": {
+          "@type": "Person",
+          "name": "بليغ عبدالله الجبري",
+          "sameAs": "https://jabri-com.vercel.app/"
+        },
+        "applicationCategory": "Network Management",
+        "operatingSystem": "Python 3.10+"
+      }, {
+        "@type": "WebSite",
+        "name": "واحة الجبري",
+        "url": "https://jabri-com.vercel.app/",
+        "description": "منصة توثيق تراث اليمن وبوابة السندباد للأبحاث العلمية."
+      }]
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== الأنماط + زر اللغة ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0a; color: #FFD700; font-family: 'Tajawal', sans-serif; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+    
+    /* زر اللغة (ثابت في الأعلى) */
+    .lang-btn { position: fixed; top: 20px; left: 20px; background: #FFD700; border: none; color: #0a0a0a; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; z-index: 999; text-decoration: none; font-family: 'Tajawal', sans-serif; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+    .lang-btn:hover { background: #fff; transform: scale(1.05); }
+
+    .container { max-width: 900px; width: 100%; background: #111; border: 2px solid #8B4513; border-radius: 20px; padding: 30px; box-shadow: 0 0 40px rgba(139, 69, 19, 0.3); margin-top: 40px; }
+    
+    header { text-align: center; border-bottom: 2px solid #8B4513; padding-bottom: 20px; margin-bottom: 25px; }
+    header img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FFD700; margin-bottom: 10px; }
+    header h1 { font-size: 2.2rem; color: #FFD700; text-shadow: 0 0 10px #8B4513; }
+    header h3 { color: #DAA520; font-weight: 400; }
+    header .oasis-tag { display: inline-block; background: #8B4513; color: #FFD700; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; }
+
+    .status-card { background: #1a1a1a; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-right: 5px solid #FFD700; }
+    .status-card .badge { display: inline-block; padding: 5px 15px; border-radius: 30px; font-weight: bold; margin-top: 5px; }
+    .badge.online { background: #2e7d32; color: #a5d6a7; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 18px; transition: 0.3s; }
+    .card:hover { border-color: #FFD700; transform: translateY(-3px); }
+    .card h3 { color: #FFD700; margin-bottom: 10px; }
+    .card p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+    .card code { background: #2a2a2a; padding: 3px 10px; border-radius: 5px; color: #FFA500; font-size: 0.9rem; }
+
+    .btn { display: inline-block; background: linear-gradient(135deg, #8B4513, #A0522D); color: #fff; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 10px; border: none; cursor: pointer; font-size: 16px; }
+    .btn:hover { opacity: 0.9; transform: scale(1.05); }
+
+    .command-list { background: #0d0d0d; padding: 15px; border-radius: 10px; font-family: monospace; direction: ltr; text-align: left; color: #0f0; }
+
+    footer { margin-top: 30px; text-align: center; color: #666; border-top: 1px solid #222; padding-top: 20px; font-size: 0.9rem; }
+    footer a { color: #FFD700; text-decoration: none; margin: 0 8px; }
+    footer .oasis-banner { background: #1a1a1a; border: 1px solid #8B4513; border-radius: 12px; padding: 15px; margin: 15px 0; }
+    footer .oasis-banner a { color: #FFD700; font-weight: bold; font-size: 1.1rem; }
+    footer .oasis-banner .highlight { color: #6ae3ff; }
+  </style>
+</head>
+<body>
+
+<!-- ===== زر اللغة ===== -->
+<a href="en-page.html" class="lang-btn">🇬🇧 English</a>
+
+<div class="container">
+
+  <!-- ===== الهيدر ===== -->
+  <header role="banner">
+    <img src="https://jabri-com.vercel.app/image/Baleegh2026.png" alt="شبكة العنكبوت" />
+    <h1>🕸️ شبكة العنكبوت</h1>
+    <h3>نظام إدارة الشبكة عن بعد – مطور بواسطة: <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; text-decoration:underline;">بليغ عبدالله الجبري</a></h3>
+    <div class="oasis-tag">🏛️ بالتعاون مع <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700;">واحة الجبري</a> للبحث العلمي والتراث اليمني</div>
+  </header>
+
+  <!-- ===== المحتوى ===== -->
+  <main role="main">
+
+    <section class="status-card">
+      <h2>📡 حالة نظام التحكم</h2>
+      <p>البوت: <span class="badge online">🟢 يعمل (متصل)</span></p>
+      <p>آخر تحديث: <span id="updateTime"></span></p>
+      <p>📌 <strong>ملاحظة:</strong> هذا النظام يعمل عبر <strong>بوت تليجرام</strong> فقط. لا سيرفر لا كلاود.</p>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🤖 رابط البوت</h3>
+        <p>للتحكم الفوري بالشبكة من هاتفك:</p>
+        <p><code>@AlAnkaboot_YE_Bot</code></p>
+        <a href="https://t.me/AlAnkaboot_YE_Bot" target="_blank" class="btn">🚀 افتح البوت الان</a>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ متطلبات التشغيل</h3>
+        <ul style="color:#ccc; list-style: none; padding: 0;">
+          <li>✅ Python 3.10+</li>
+          <li>✅ مكتبة <code>routeros-api</code></li>
+          <li>✅ <code>python-telegram-bot</code></li>
+          <li>🔌 منفذ API في الميكروتيك: <code>8728</code></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📋 الأوامر المتاحة</h3>
+        <div class="command-list">
+          /start - بدء التشغيل<br>
+          IP user pass - تسجيل الدخول<br>
+          /hotspots - عرض الهوبات<br>
+          /users - مستخدمي هوب معين<br>
+          /disconnect - فصل مستخدم<br>
+          /status - حالة النظام<br>
+          /logout - تسجيل الخروج
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ إعداد الميكروتيك</h3>
+        <p>تأكد من تفعيل API:</p>
+        <code style="display:block; background:#000; padding:8px; border-radius:5px; margin:5px 0;">/ip service enable api</code>
+      </div>
+    </div>
+
+    <!-- قسم الواحة -->
+    <div class="card" style="margin-top:15px; background:#0a0a0a; border-color:#8B4513;">
+      <h3>🏛️ واحة الجبري – تراث اليمن العريق</h3>
+      <p style="color:#ddd;">
+        <strong>واحة الجبري</strong> هي منصة توثيق تراث اليمن وبوابة السندباد للأبحاث العلمية في الرياضيات والفيزياء النظرية.
+        يقدمها <strong>م/ عبدالله محمد ناصر الجبري</strong>، الباحث المستقل في دالة <code>Zx</code> ومسائل الألفية.
+      </p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:15px;">
+        <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" class="btn" style="background: #0a3d62; border:2px solid #6ae3ff;">🇾🇪 استكشف واحة الجبري</a>
+        <a href="https://jabri-com.vercel.app/Sanaa.html" target="_blank" class="btn" style="background: #2a2a3e; border:2px solid #6ae3ff;">🏛️ صنعاء القديمة</a>
+        <a href="https://jabri-com.vercel.app/research.html" target="_blank" class="btn" style="background: #2a2a3e; border:2px solid #6ae3ff;">📚 أرشيف الأبحاث</a>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:15px; background:#0a0a0a;">
+      <h3>📖 دليل الاستخدام السريع</h3>
+      <ol style="color:#ddd; padding-right: 20px; line-height: 2;">
+        <li><strong>تسجيل الدخول:</strong> ارسل: <code>192.168.88.1 admin 123</code></li>
+        <li><strong>استعراض:</strong> اضغط `/hotspots` لرؤية جميع نقاط الشبكة.</li>
+        <li><strong>التحكم:</strong> استخدم `/users` ثم `/disconnect`</li>
+      </ol>
+    </div>
+
+  </main>
+
+  <!-- ===== الفوتر ===== -->
+  <footer role="contentinfo">
+    <div class="oasis-banner">
+      <p style="color:#ccc; font-size:0.95rem;">
+        🏛️ هذا المشروع جزء من منظومة <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; font-weight:bold;">واحة الجبري</a>
+        <span class="highlight">🇾🇪</span> – توثيق تراث اليمن ونظرية السندباد الموحدة
+      </p>
+      <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+        <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank">🏛️ الرئيسية</a>
+        <a href="https://jabri-com.vercel.app/about.html" target="_blank">ℹ️ عن الباحث</a>
+        <a href="https://jabri-com.vercel.app/contact.html" target="_blank">📞 اتصل بالواحة</a>
+        <a href="https://jabri-com.vercel.app/research.html" target="_blank">🔬 الأبحاث</a>
+      </div>
+    </div>
+
+    <div>
+      <a href="/about.html">ℹ️ عن الشبكة</a>
+      <a href="https://jabri-com.vercel.app/" target="_blank">♻️ واحة الجبري</a>
+      <a href="/sitemap.xml">🗺️ خريطة الموقع</a>
+    </div>
+    <p style="margin-top:15px; color:#666;">🇾🇪 بليغ عبدالله الجبري | جميع الحقوق محفوظة © 2026 🇾🇪</p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('updateTime').innerText = new Date().toLocaleString('ar-YE');
+</script>
+
+</body>
+</html>
