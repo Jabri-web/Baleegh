@@ -6,74 +6,84 @@
 
   <!-- SEO الأساسي -->
   <title>شبكة العنكبوت | نظام إدارة شبكات الميكروتيك عن بعد</title>
-  <meta name="description" content="شبكة العنكبوت - نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. حلول متكاملة في إدارة الشبكات والاتصالات، مع دعم فني على مدار الساعة." />
-  <meta name="keywords" content="ميكروتيك, إدارة الشبكات, بوت تليجرام, شبكة العنكبوت, MikroTik, VPN, bandwidth management, بليغ الجبري" />
+  <meta name="description" content="شبكة العنكبوت - نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. حلول متكاملة في إدارة الشبكات والاتصالات، بالتعاون مع واحة الجبري للبحث العلمي." />
+  <meta name="keywords" content="ميكروتيك, إدارة الشبكات, بوت تليجرام, شبكة العنكبوت, MikroTik, VPN, bandwidth management, بليغ الجبري, واحة الجبري" />
   <meta name="author" content="بليغ عبدالله الجبري" />
   <link rel="canonical" href="https://baleegh.vercel.app/" />
   <link rel="alternate" hreflang="ar" href="https://baleegh.vercel.app/" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
 
-  <!-- Open Graph (لوسائل التواصل) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="شبكة العنكبوت | نظام إدارة شبكات الميكروتيك" />
-  <meta property="og:description" content="نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. حلول متكاملة في إدارة الشبكات والاتصالات." />
+  <meta property="og:description" content="نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام. بالتعاون مع واحة الجبري للبحث العلمي والتراث اليمني." />
   <meta property="og:image" content="https://jabri-com.vercel.app/image/Baleegh2026.png" />
   <meta property="og:url" content="https://baleegh.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="شبكة العنكبوت | نظام إدارة شبكات الميكروتيك" />
-  <meta name="twitter:description" content="نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام." />
-  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Baleegh2026.png" />
 
-  <!-- البيانات المنظمة (Schema.org) -->
+  <!-- البيانات المنظمة (Schema.org) مع ربط بالواحة -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "شبكة العنكبوت",
-      "description": "نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام",
-      "url": "https://baleegh.vercel.app/",
-      "author": {
-        "@type": "Person",
-        "name": "بليغ عبدالله الجبري"
-      },
-      "applicationCategory": "Network Management",
-      "operatingSystem": "Python 3.10+",
-      "browserRequirements": "Requires Telegram"
+      "@graph": [{
+        "@type": "WebApplication",
+        "name": "شبكة العنكبوت",
+        "description": "نظام إدارة شبكات الميكروتيك عن بعد عبر بوت تليجرام، بالتعاون مع واحة الجبري للبحث العلمي.",
+        "url": "https://baleegh.vercel.app/",
+        "author": {
+          "@type": "Person",
+          "name": "بليغ عبدالله الجبري",
+          "sameAs": "https://jabri-com.vercel.app/"
+        },
+        "applicationCategory": "Network Management",
+        "operatingSystem": "Python 3.10+"
+      }, {
+        "@type": "WebSite",
+        "name": "واحة الجبري",
+        "url": "https://jabri-com.vercel.app/",
+        "description": "منصة توثيق تراث اليمن وبوابة السندباد للأبحاث العلمية."
+      }]
     }
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet" />
 
   <style>
-    /* أنماطك الحالية مع تعديلات طفيفة (حافظنا على التصميم نفسه) */
+    /* ===== الأنماط كالسابق مع إضافة تنسيق للواحة ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0a; color: #FFD700; font-family: 'Tajawal', sans-serif; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
     .container { max-width: 900px; width: 100%; background: #111; border: 2px solid #8B4513; border-radius: 20px; padding: 30px; box-shadow: 0 0 40px rgba(139, 69, 19, 0.3); }
     
-    /* الهيدر الدلالي */
     header { text-align: center; border-bottom: 2px solid #8B4513; padding-bottom: 20px; margin-bottom: 25px; }
     header img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FFD700; margin-bottom: 10px; }
     header h1 { font-size: 2.2rem; color: #FFD700; text-shadow: 0 0 10px #8B4513; }
     header h3 { color: #DAA520; font-weight: 400; }
+    header .oasis-tag { display: inline-block; background: #8B4513; color: #FFD700; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; }
 
-    /* باقي الأنماط كالسابق */
     .status-card { background: #1a1a1a; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-right: 5px solid #FFD700; }
     .status-card .badge { display: inline-block; padding: 5px 15px; border-radius: 30px; font-weight: bold; margin-top: 5px; }
     .badge.online { background: #2e7d32; color: #a5d6a7; }
+
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
     @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
     .card { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 18px; transition: 0.3s; }
     .card:hover { border-color: #FFD700; transform: translateY(-3px); }
     .card h3 { color: #FFD700; margin-bottom: 10px; }
     .card p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
     .card code { background: #2a2a2a; padding: 3px 10px; border-radius: 5px; color: #FFA500; font-size: 0.9rem; }
+
     .btn { display: inline-block; background: linear-gradient(135deg, #8B4513, #A0522D); color: #fff; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 10px; border: none; cursor: pointer; font-size: 16px; }
     .btn:hover { opacity: 0.9; transform: scale(1.05); }
+
     .command-list { background: #0d0d0d; padding: 15px; border-radius: 10px; font-family: monospace; direction: ltr; text-align: left; color: #0f0; }
 
-    /* الفوتر الدلالي */
+    /* الفوتر المطور */
     footer { margin-top: 30px; text-align: center; color: #666; border-top: 1px solid #222; padding-top: 20px; font-size: 0.9rem; }
     footer a { color: #FFD700; text-decoration: none; margin: 0 8px; }
+    footer .oasis-banner { background: #1a1a1a; border: 1px solid #8B4513; border-radius: 12px; padding: 15px; margin: 15px 0; }
+    footer .oasis-banner a { color: #FFD700; font-weight: bold; font-size: 1.1rem; }
+    footer .oasis-banner .highlight { color: #6ae3ff; }
   </style>
 </head>
 <body>
@@ -82,12 +92,13 @@
 
   <!-- ===== الهيدر ===== -->
   <header role="banner">
-    <img src="https://jabri-com.vercel.app/image/Baleegh2026.png" alt="شبكة العنكبوت - نظام إدارة الشبكات" />
+    <img src="https://jabri-com.vercel.app/image/Baleegh2026.png" alt="شبكة العنكبوت" />
     <h1>🕸️ شبكة العنكبوت</h1>
-    <h3>نظام إدارة الشبكة عن بعد – مطور بواسطة: بليغ عبدالله الجبري</h3>
+    <h3>نظام إدارة الشبكة عن بعد – مطور بواسطة: <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; text-decoration:underline;">بليغ عبدالله الجبري</a></h3>
+    <div class="oasis-tag">🏛️ بالتعاون مع <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700;">واحة الجبري</a> للبحث العلمي والتراث اليمني</div>
   </header>
 
-  <!-- ===== المحتوى الأساسي ===== -->
+  <!-- ===== المحتوى ===== -->
   <main role="main">
 
     <section class="status-card">
@@ -135,6 +146,20 @@
       </div>
     </div>
 
+    <!-- ===== إضافة قسم للواحة داخل المحتوى ===== -->
+    <div class="card" style="margin-top:15px; background:#0a0a0a; border-color:#8B4513;">
+      <h3>🏛️ واحة الجبري – تراث اليمن العريق</h3>
+      <p style="color:#ddd;">
+        <strong>واحة الجبري</strong> هي منصة توثيق تراث اليمن وبوابة السندباد للأبحاث العلمية في الرياضيات والفيزياء النظرية.
+        يقدمها <strong>م/ عبدالله محمد ناصر الجبري</strong>، الباحث المستقل في دالة <code>Zx</code> ومسائل الألفية.
+      </p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:15px;">
+        <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" class="btn" style="background: #0a3d62; border:2px solid #6ae3ff;">🇾🇪 استكشف واحة الجبري</a>
+        <a href="https://jabri-com.vercel.app/Sanaa.html" target="_blank" class="btn" style="background: #2a2a3e; border:2px solid #6ae3ff;">🏛️ صنعاء القديمة</a>
+        <a href="https://jabri-com.vercel.app/research.html" target="_blank" class="btn" style="background: #2a2a3e; border:2px solid #6ae3ff;">📚 أرشيف الأبحاث</a>
+      </div>
+    </div>
+
     <div class="card" style="margin-top:15px; background:#0a0a0a;">
       <h3>📖 دليل الاستخدام السريع</h3>
       <ol style="color:#ddd; padding-right: 20px; line-height: 2;">
@@ -148,6 +173,21 @@
 
   <!-- ===== الفوتر ===== -->
   <footer role="contentinfo">
+
+    <!-- بانر الواحة داخل الفوتر -->
+    <div class="oasis-banner">
+      <p style="color:#ccc; font-size:0.95rem;">
+        🏛️ هذا المشروع جزء من منظومة <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; font-weight:bold;">واحة الجبري</a>
+        <span class="highlight">🇾🇪</span> – توثيق تراث اليمن ونظرية السندباد الموحدة
+      </p>
+      <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+        <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank">🏛️ الرئيسية</a>
+        <a href="https://jabri-com.vercel.app/about.html" target="_blank">ℹ️ عن الباحث</a>
+        <a href="https://jabri-com.vercel.app/contact.html" target="_blank">📞 اتصل بالواحة</a>
+        <a href="https://jabri-com.vercel.app/research.html" target="_blank">🔬 الأبحاث</a>
+      </div>
+    </div>
+
     <div>
       <a href="/about.html">ℹ️ عن الشبكة</a>
       <a href="https://jabri-com.vercel.app/" target="_blank">♻️ واحة الجبري</a>
