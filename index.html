@@ -66,6 +66,36 @@
     header h3 { color: #DAA520; font-weight: 400; }
     header .oasis-tag { display: inline-block; background: #8B4513; color: #FFD700; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; }
 
+    /* ===== شريط التنقل الجديد ===== */
+    nav.main-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #2a2a2a;
+    }
+    nav.main-nav a {
+      color: #ccc;
+      text-decoration: none;
+      padding: 6px 16px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      transition: 0.3s;
+      font-size: 0.95rem;
+    }
+    nav.main-nav a:hover {
+      background: #FFD700;
+      color: #0a0a0a;
+      border-color: #FFD700;
+    }
+    nav.main-nav a.active {
+      background: #FFD700;
+      color: #0a0a0a;
+      border-color: #FFD700;
+    }
+
     .status-card { background: #1a1a1a; border-radius: 15px; padding: 20px; margin-bottom: 20px; border-right: 5px solid #FFD700; }
     .status-card .badge { display: inline-block; padding: 5px 15px; border-radius: 30px; font-weight: bold; margin-top: 5px; }
     .badge.online { background: #2e7d32; color: #a5d6a7; }
@@ -83,6 +113,20 @@
     .btn:hover { opacity: 0.9; transform: scale(1.05); }
 
     .command-list { background: #0d0d0d; padding: 15px; border-radius: 10px; font-family: monospace; direction: ltr; text-align: left; color: #0f0; }
+
+    /* ===== قسم المقال الجديد ===== */
+    .blog-highlight {
+      background: #1a1a1a;
+      border: 2px solid #FFD700;
+      border-radius: 16px;
+      padding: 20px 25px;
+      margin: 25px 0;
+      transition: 0.3s;
+    }
+    .blog-highlight:hover { border-color: #FFA500; transform: scale(1.01); }
+    .blog-highlight .blog-title { color: #FFD700; font-size: 1.3rem; margin-bottom: 5px; }
+    .blog-highlight .blog-desc { color: #ccc; font-size: 0.95rem; }
+    .blog-highlight .blog-link { color: #FFA500; text-decoration: none; font-weight: bold; }
 
     footer { margin-top: 30px; text-align: center; color: #666; border-top: 1px solid #222; padding-top: 20px; font-size: 0.9rem; }
     footer a { color: #FFD700; text-decoration: none; margin: 0 8px; }
@@ -104,6 +148,14 @@
     <h1>🕸️ شبكة العنكبوت</h1>
     <h3>نظام إدارة الشبكة عن بعد – مطور بواسطة: <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; text-decoration:underline;">بليغ عبدالله الجبري</a></h3>
     <div class="oasis-tag">🏛️ بالتعاون مع <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700;">واحة الجبري</a> للبحث العلمي والتراث اليمني</div>
+    
+    <!-- ===== شريط التنقل (مع رابط المقال الجديد) ===== -->
+    <nav class="main-nav">
+      <a href="/" class="active">🏠 الرئيسية</a>
+      <a href="/microtik.html">📖 مقالات تقنية</a>
+      <a href="/ar/about.html">ℹ️ عن الشبكة</a>
+      <a href="/contact.html">📞 اتصل بنا</a>
+    </nav>
   </header>
 
   <!-- ===== المحتوى ===== -->
@@ -154,6 +206,18 @@
       </div>
     </div>
 
+    <!-- ===== قسم المقال الجديد (يبرز المحتوى التقني) ===== -->
+    <div class="blog-highlight">
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <span style="background:#8B4513; color:#FFD700; padding:5px 15px; border-radius:20px; font-size:0.8rem;">📢 جديد</span>
+        <h3 style="color:#FFD700; margin:0;">مقال تقني: إدارة MikroTik عن بُعد باستخدام Tailscale</h3>
+      </div>
+      <p class="blog-desc">
+        دليل شامل لإدارة أجهزة MikroTik عن بُعد باستخدام Tailscale – شبكة WireGuard متشابكة مع اجتياز NAT تلقائي ووصول قائم على الهوية. 
+        <a href="/microtik.html" class="blog-link">اقرأ المقال كاملاً ←</a>
+      </p>
+    </div>
+
     <!-- قسم الواحة -->
     <div class="card" style="margin-top:15px; background:#0a0a0a; border-color:#8B4513;">
       <h3>🏛️ واحة الجبري – تراث اليمن العريق</h3>
@@ -195,7 +259,8 @@
     </div>
 
     <div>
-      <a href="/about.html">ℹ️ عن الشبكة</a>
+      <a href="/microtik.html">📖 مقالات تقنية</a>
+      <a href="/ar/about.html">ℹ️ عن الشبكة</a>
       <a href="https://jabri-com.vercel.app/" target="_blank">♻️ واحة الجبري</a>
       <a href="/sitemap.xml">🗺️ خريطة الموقع</a>
     </div>
