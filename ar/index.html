@@ -10,7 +10,7 @@
   <meta name="keywords" content="ميكروتيك, إدارة الشبكات, بوت تليجرام, شبكة العنكبوت, MikroTik, VPN, bandwidth management, بليغ الجبري, واحة الجبري" />
   <meta name="author" content="بليغ عبدالله الجبري" />
   <link rel="canonical" href="https://baleegh.vercel.app/" />
-  <link rel="alternate" hreflang="en" href="https://baleegh.vercel.app/en-page.html" />
+  <link rel="alternate" hreflang="en" href="https://baleegh.vercel.app/en/index.html" />
   <link rel="alternate" hreflang="ar" href="https://baleegh.vercel.app/" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -50,11 +50,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet" />
 
   <style>
-    /* ===== الأنماط + زر اللغة ===== */
+    /* ===== الأنماط ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0a; color: #FFD700; font-family: 'Tajawal', sans-serif; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
     
-    /* زر اللغة (ثابت في الأعلى) */
     .lang-btn { position: fixed; top: 20px; left: 20px; background: #FFD700; border: none; color: #0a0a0a; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; z-index: 999; text-decoration: none; font-family: 'Tajawal', sans-serif; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
     .lang-btn:hover { background: #fff; transform: scale(1.05); }
 
@@ -66,7 +65,6 @@
     header h3 { color: #DAA520; font-weight: 400; }
     header .oasis-tag { display: inline-block; background: #8B4513; color: #FFD700; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; }
 
-    /* ===== شريط التنقل الجديد ===== */
     nav.main-nav {
       display: flex;
       justify-content: center;
@@ -114,7 +112,6 @@
 
     .command-list { background: #0d0d0d; padding: 15px; border-radius: 10px; font-family: monospace; direction: ltr; text-align: left; color: #0f0; }
 
-    /* ===== قسم المقال الجديد ===== */
     .blog-highlight {
       background: #1a1a1a;
       border: 2px solid #FFD700;
@@ -138,7 +135,7 @@
 <body>
 
 <!-- ===== زر اللغة ===== -->
-<a href="en-page.html" class="lang-btn">🇬🇧 English</a>
+<a href="/en/index.html" class="lang-btn">🇬🇧 English</a>
 
 <div class="container">
 
@@ -149,7 +146,7 @@
     <h3>نظام إدارة الشبكة عن بعد – مطور بواسطة: <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700; text-decoration:underline;">بليغ عبدالله الجبري</a></h3>
     <div class="oasis-tag">🏛️ بالتعاون مع <a href="https://jabri-com.vercel.app/ar-page.html" target="_blank" style="color:#FFD700;">واحة الجبري</a> للبحث العلمي والتراث اليمني</div>
     
-    <!-- ===== شريط التنقل (مع رابط المقال الجديد) ===== -->
+    <!-- ===== شريط التنقل ===== -->
     <nav class="main-nav">
       <a href="/" class="active">🏠 الرئيسية</a>
       <a href="/microtik.html">📖 مقالات تقنية</a>
@@ -206,7 +203,7 @@
       </div>
     </div>
 
-    <!-- ===== قسم المقال الجديد (يبرز المحتوى التقني) ===== -->
+    <!-- ===== قسم المقال الجديد ===== -->
     <div class="blog-highlight">
       <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
         <span style="background:#8B4513; color:#FFD700; padding:5px 15px; border-radius:20px; font-size:0.8rem;">📢 جديد</span>
@@ -237,7 +234,7 @@
       <ol style="color:#ddd; padding-right: 20px; line-height: 2;">
         <li><strong>تسجيل الدخول:</strong> ارسل: <code>192.168.88.1 admin 123</code></li>
         <li><strong>استعراض:</strong> اضغط `/hotspots` لرؤية جميع نقاط الشبكة.</li>
-        <li><strong>التحكم:</strong> استخدم `/users` ثم `/disconnect`</li>
+        <li><strong>التحكم:</strong> استخدم `/users` ثم `/disconnect</li>
       </ol>
     </div>
 
