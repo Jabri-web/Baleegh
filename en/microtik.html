@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>Remote MikroTik Management with Tailscale | Al-Ankaboot Network</title>
+    <meta name="description" content="A complete guide to managing MikroTik devices remotely using Tailscale – a WireGuard mesh network with automatic NAT traversal and identity-based access." />
+    <meta name="keywords" content="MikroTik, Tailscale, remote management, VPN, WireGuard, CGNAT, network administration, Al-Ankaboot Network" />
+    <link rel="canonical" href="https://baleegh.vercel.app/en/microtik.html" />
+    <link rel="alternate" hreflang="ar" href="https://baleegh.vercel.app/microtik.html" />
+    <link rel="alternate" hreflang="en" href="https://baleegh.vercel.app/en/microtik.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Remote MikroTik Management with Tailscale">
+    <meta property="og:description" content="A complete guide to managing MikroTik devices remotely using Tailscale.">
+    <meta property="og:image" content="https://baleegh.vercel.app/images/blog-tailscale.jpg">
+    <meta property="og:url" content="https://baleegh.vercel.app/en/microtik.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured Data (Article) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Remote MikroTik Management with Tailscale",
+        "description": "A complete guide to managing MikroTik devices remotely using Tailscale – a WireGuard mesh network with automatic NAT traversal and identity-based access.",
+        "author": {
+            "@type": "Person",
+            "name": "Baleegh Abdulla Al-Jabri",
+            "url": "https://baleegh.vercel.app/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Al-Ankaboot Network",
+            "url": "https://baleegh.vercel.app/"
+        },
+        "datePublished": "2026-07-30",
+        "dateModified": "2026-07-30",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://baleegh.vercel.app/en/microtik.html"
+        }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* ===== Same styles as Arabic version (adjusted for LTR) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Tajawal', sans-serif;
+            padding: 20px;
+            line-height: 1.9;
+            direction: ltr;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #111;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+        }
+        h1 { color: #FFD700; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        h2 { color: #FFD700; font-size: 1.8rem; margin: 2rem 0 1rem 0; border-left: 4px solid #FFD700; padding-left: 15px; }
+        h3 { color: #FFA500; font-size: 1.3rem; margin: 1.5rem 0 0.8rem 0; }
+        p, li { color: #ccc; font-size: 1.05rem; margin-bottom: 1rem; }
+        ul, ol { padding-left: 2rem; }
+        li { margin-bottom: 0.5rem; }
+        code {
+            background: #1a1a1a;
+            color: #FFA500;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            direction: ltr;
+            display: inline-block;
+            margin: 5px 0;
+            border: 1px solid #2a2a2a;
+            font-size: 0.95rem;
+        }
+        pre {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            color: #0f0;
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #8B4513;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: 2px solid #FFD700;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background: #FFD700;
+            color: #0a0a0a;
+            border-color: #8B4513;
+        }
+        .meta {
+            color: #666;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FFD700;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            border: 1px solid #2a2a2a;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            color: #FFD700;
+        }
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            background: #1a1a1a;
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            gap: 4px;
+        }
+        .lang-switch a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .lang-switch a.active {
+            background: #FFD700;
+            color: #0a0a0a;
+            font-weight: 700;
+        }
+        .lang-switch a:hover { background: #FFD70040; }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            code { font-size: 0.85rem; padding: 2px 8px; }
+            .lang-switch { top: 10px; right: 10px; padding: 4px 8px; }
+            .lang-switch a { font-size: 0.8rem; padding: 2px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Language Switcher ===== -->
+    <div class="lang-switch">
+        <a href="/microtik.html">🇸🇦 عربي</a>
+        <a href="/en/microtik.html" class="active">🇬🇧 English</a>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== Header ===== -->
+        <header style="text-align:center; border-bottom: 2px solid #222; padding-bottom: 20px; margin-bottom: 25px;">
+            <img src="https://jabri-com.vercel.app/image/Baleegh2026.png" alt="Al-Ankaboot Network" style="width:80px; border-radius:50%; border:2px solid #FFD700;">
+            <h1 style="margin-top:10px;">🕸️ Al-Ankaboot Network</h1>
+            <p style="color:#aaa;">Remote Network Management – Professional MikroTik Solutions</p>
+            <nav style="margin-top:15px; display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+                <a href="/en/index.html" style="color:#FFD700; text-decoration:none;">Home</a>
+                <a href="/en/microtik.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">📖 Tech Articles</a>
+                <a href="/en/about.html" style="color:#FFD700; text-decoration:none;">About</a>
+                <a href="/contact.html" style="color:#FFD700; text-decoration:none;">Contact</a>
+            </nav>
+        </header>
+
+        <!-- ===== Article ===== -->
+        <main>
+            <article>
+                <h1>🚀 Remote MikroTik Management with Tailscale</h1>
+                <div class="meta">
+                    <span>📅 July 30, 2026</span> &nbsp;|&nbsp; <span>⏱️ 5 min read</span> &nbsp;|&nbsp; <span>🏷️ MikroTik, VPN, Networking</span>
+                </div>
+
+                <p>
+                    In the world of network management, the biggest challenge remains <strong>secure and reliable remote access to MikroTik devices</strong>, especially when they are behind private IP addresses (NAT) or CGNAT networks. Traditional solutions require public IPs, port forwarding, or complex VPN configurations.
+                </p>
+                <p>
+                    This is where <strong>Tailscale</strong> comes in – an intelligent control layer built on top of <strong>WireGuard</strong>, making it as easy as signing in with Google to create a private VPN network (Tailnet) and automatically handling key distribution and NAT traversal.
+                </p>
+
+                <div class="highlight-box">
+                    <p style="margin:0; color:#FFD700;"><strong>✨ Key Takeaway:</strong> With Tailscale, you can manage any MikroTik router remotely as if you were right in front of it – no public IP, no port forwarding, and no manual configuration.</p>
+                </div>
+
+                <h2>🧠 How Tailscale Works with MikroTik</h2>
+                <p>
+                    Tailscale adds a control layer on top of WireGuard, automating key distribution, peer discovery, and NAT traversal. It is natively supported by MikroTik on <strong>RouterOS 7.11+</strong> via an official package, meaning you can add a router to your Tailnet, advertise its LAN subnet, and access every device behind it from any other peer in the Tailnet.
+                </p>
+                <ul>
+                    <li><strong>Tailnet</strong>: Your private network of authorized devices.</li>
+                    <li><strong>Control Plane</strong>: Handles authentication, key exchange, and administrative operations.</li>
+                    <li><strong>DERP</strong>: Tailscale's encrypted relay network, used only when direct peer‑to‑peer fails.</li>
+                    <li><strong>Peers</strong>: Every device in the Tailnet (server, laptop, MikroTik, phone).</li>
+                    <li><strong>Subnet Routes</strong>: A peer can advertise a full CIDR (e.g., 192.168.88.0/24) through itself, making devices behind it reachable without installing Tailscale on each.</li>
+                </ul>
+
+                <h2>🔐 Security Model</h2>
+                <p>
+                    Tailscale's transport security is the same as WireGuard: modern encryption (ChaCha20‑Poly1305) and a small attack surface. Access control is identity‑based – ACLs grant or deny access based on user, group, or device tags rather than IP. Lost or compromised devices are immediately revoked from the admin console, and logs and audit trails provide the visibility needed for compliance reviews.
+                </p>
+                <div class="highlight-box">
+                    <p style="margin:0; color:#FFD700;">💡 Tip: Enable MFA on your identity provider and define ACLs early – both are much easier to set up early than to fix later.</p>
+                </div>
+
+                <h2>🛠️ Step‑by‑Step Setup Guide</h2>
+
+                <h3>Step 1: Install Tailscale on a Server or Workstation</h3>
+                <p>On a Linux server (Ubuntu/Debian):</p>
+                <pre>
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up --authkey &lt;AUTHKEY&gt;
+tailscale status
+                </pre>
+                <p>Once you have at least one peer running, you have a Tailnet to add your MikroTik to.</p>
+
+                <h3>Step 2: Install the Tailscale Package on MikroTik (RouterOS 7.11+)</h3>
+                <ul>
+                    <li>Download <code>tailscale-7.x-&lt;arch&gt;.npk</code> from the MikroTik downloads page.</li>
+                    <li>Upload the <code>.npk</code> to the router (Winbox → Files → drag and drop).</li>
+                    <li>Reboot the router to load the package.</li>
+                </ul>
+
+                <h3>Step 3: Authenticate the Router</h3>
+                <p>In Winbox terminal:</p>
+                <pre>/tailscale up</pre>
+                <p>It will print an authentication URL. Open it in a browser, log in with your identity provider, and approve the device in the Tailscale admin console. Verify:</p>
+                <pre>/tailscale status</pre>
+                <p>When the status shows <code>connected</code>, your MikroTik is on the Tailnet and has a <code>100.x.x.x</code> address that you can ping from any other Tailnet peer.</p>
+
+                <h3>Step 4: Advertise the LAN Subnet</h3>
+                <p>To make devices on the router's LAN (e.g., <code>192.168.88.0/24</code>) reachable:</p>
+                <pre>
+/ip route add dst-address=192.168.88.0/24 gateway=tailscale0
+/tailscale up --advertise-routes=192.168.88.0/24
+                </pre>
+                <p>Then open the Tailscale admin console and approve the advertised route – this two‑step process ensures no router can silently advertise a public subnet without operator review.</p>
+
+                <h3>Step 5: Use the Tailnet</h3>
+                <p>Now you can SSH directly to a host behind the MikroTik:</p>
+                <pre>ssh admin@100.x.x.x</pre>
+                <p>Or use MagicDNS to avoid IPs entirely:</p>
+                <pre>ping mikrotik.yourtailnet.ts.net</pre>
+                <p>Subnet routes make IP cameras, NAS units, management VLANs, and any other LAN device accessible without port‑forwarding each service.</p>
+
+                <h2>📊 Comparison with Other VPN Solutions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Solution</th>
+                            <th>Core</th>
+                            <th>Ease of Setup</th>
+                            <th>Performance</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tailscale</strong></td>
+                            <td>WireGuard + Control Plane</td>
+                            <td>Very Easy</td>
+                            <td>High</td>
+                            <td>Teams, ISPs, hybrid infrastructure</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WireGuard (manual)</strong></td>
+                            <td>WireGuard</td>
+                            <td>Moderate</td>
+                            <td>Very High</td>
+                            <td>Small deployments, self‑managed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OpenVPN / IPsec</strong></td>
+                            <td>TLS / IPsec</td>
+                            <td>Complex</td>
+                            <td>Moderate</td>
+                            <td>Legacy devices, strict PKI requirements</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ZeroTier</strong></td>
+                            <td>Custom mesh protocol</td>
+                            <td>Easy</td>
+                            <td>High</td>
+                            <td>Identity‑less mesh networks</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>📌 Best Practices</h2>
+                <ul>
+                    <li><strong>Enable ACLs early</strong> with least‑privilege rules. Tags and groups simplify policy as your Tailnet grows.</li>
+                    <li><strong>Use MagicDNS</strong> to avoid IP address clutter in documentation. Names are easier to revoke and reassign.</li>
+                    <li><strong>Enforce MFA</strong> on your identity provider – Tailnet security is only as strong as the identity layer beneath it.</li>
+                    <li><strong>Keep the router and Tailscale package updated.</strong> Both are updated on independent schedules, and lagging behind is a defensive configuration violation.</li>
+                    <li><strong>Review the device list</strong> monthly and remove obsolete devices from the fleet.</li>
+                </ul>
+
+                <h2>🏁 Conclusion</h2>
+                <p>
+                    Tailscale modernises remote access by combining WireGuard's performance with a control plane that eliminates most manual setup. For MikroTik fleets, it is a practical, high‑performance way to manage routers and their LANs without public IPs or hand‑crafted tunnels.
+                </p>
+                <p>
+                    If you prefer to skip per‑device agent installations and route‑based dependencies, <strong>Al‑Ankaboot Network</strong> offers integrated remote management solutions with centralised monitoring and support.
+                </p>
+
+                <div style="text-align:center; margin-top:30px;">
+                    <a href="/contact.html" class="btn">📞 Contact Us for a Free Consultation</a>
+                </div>
+            </article>
+        </main>
+
+        <!-- ===== Footer ===== -->
+        <footer>
+            <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+                <a href="/en/index.html">🏠 Home</a>
+                <a href="/en/microtik.html">📖 Tech Articles</a>
+                <a href="/en/about.html">ℹ️ About</a>
+                <a href="https://jabri-com.vercel.app/" target="_blank">♻️ Heaven Al-Jabri</a>
+                <a href="/sitemap.xml">🗺️ Sitemap</a>
+            </div>
+            <p style="color:#666;">🇾🇪 Al-Ankaboot Network – Professional Networking Solutions © 2026</p>
+            <p style="font-size:0.8rem; color:#444;">Developed by: Baleegh Abdulla Al-Jabri</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
