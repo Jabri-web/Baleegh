@@ -1,600 +1,581 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>واحة الجبري | Heaven Al-Jabri - Z(x) ونظرية السندباد الموحدة</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#00d4ff">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <!-- ============================================================ -->
-    <!-- 1. إعدادات عامة (الكاش متروك لـ Vercel عشان السرعة)          -->
-    <!-- ============================================================ -->
-    <meta name="theme-color" content="#0a0a0f" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  
+  <!-- ====================================================================== -->
+  <!-- 1. منع الكاش + PWA -->
+  <!-- ====================================================================== -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <!-- ====================================================================== -->
+  <!-- 2. اللغات والكانونيكال والـ Sitemap -->
+  <!-- ====================================================================== -->
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/" />
+  <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/" />
+  <link rel="canonical" href="https://jabri-com.vercel.app/" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large">
+  
+  <!-- ====================================================================== -->
+  <!-- 3. العنوان والوصف + Citation -->
+  <!-- ====================================================================== -->
+  <title id="pageTitle">واحة الجبري | Heaven Al-Jabri - Z(x) ونظرية السندباد الموحدة</title>
+  <meta id="pageDescription" name="description" content="الدالة الأم Z(x) = x⁵ ln(x) sin(2π/x) exp(-x/xp) ونظرية السندباد الموحدة Z+C+A=1 - اشتقاق ثابت الجاذبية من الأعداد الصرفة - الباحث اليمني عبدالله محمد ناصر الجبري">
+  <meta name="keywords" content="واحة الجبري, نظرية السندباد الموحدة, Z+C+A=1, Z(x), عبدالله الجبري, رياضيات, فيزياء نظرية, تراث اليمن, صنعاء, شبام, سقطرى">
+  <meta name="author" content="م/ عبدالله محمد ناصر الجبري | Eng. Abdulla Mohammed Nasser Al-Jabri">
+  <link rel="author" href="https://jabri-com.vercel.app/about.html" />
 
-    <!-- ============================================================ -->
-    <!-- 2. الروابط الأساسية (لغات + كانونيكال + خريطة الموقع)        -->
-    <!-- ============================================================ -->
-    <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/" />
-    <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/" />
-    <link rel="canonical" href="https://jabri-com.vercel.app/" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+  <!-- ====================================================================== -->
+  <!-- 4. Citation Metadata -->
+  <!-- ====================================================================== -->
+  <meta name="citation_title" content="واحة الجبري Z(x) ونظرية السندباد الموحدة Z+C+A=1" />
+  <meta name="citation_author" content="عبدالله محمد ناصر الجبري" />
+  <meta name="citation_publication_date" content="2026" />
+  <meta name="citation_journal_title" content="واحة الجبري - بحوث رياضية وفيزيائية" />
+  <meta name="citation_doi" content="10.5281/zenodo.20513840" />
+  <meta name="citation_pdf_url" content="https://doi.org/10.5281/zenodo.20513840" />
+  
+  <!-- ====================================================================== -->
+  <!-- 5. Dublin Core -->
+  <!-- ====================================================================== -->
+  <meta name="DC.title" content="واحة الجبري Z(x) - نظرية الجبري الموحدة" />
+  <meta name="DC.creator" content="م/ عبدالله محمد ناصر الجبري" />
+  <meta name="DC.subject" content="الرياضيات, الفيزياء النظرية, نظرية السندباد, تراث اليمن" />
+  <meta name="DC.description" content="اشتقاق ثابت الجاذبية من الأعداد الصرفة (19, 137, 1836, 2464) بدقة 99.95% - نظرية موحدة للكون" />
+  <meta name="DC.publisher" content="واحة الجبري" />
+  <meta name="DC.date" content="2026-08-16" />
+  <meta name="DC.type" content="Text" />
+  <meta name="DC.format" content="text/html" />
+  <meta name="DC.language" content="ar" />
+  <meta name="DC.coverage" content="Yemen" />
+  <meta name="DC.rights" content="© 2026 م/ عبدالله محمد ناصر الجبري - CC BY 4.0" />
+  <meta name="DC.identifier" content="10.5281/zenodo.20513840" />
+  
+  <!-- ====================================================================== -->
+  <!-- 6. ملكية جوجل -->
+  <!-- ====================================================================== -->
+  <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  
+  <!-- ====================================================================== -->
+  <!-- 7. Open Graph + Twitter -->
+  <!-- ====================================================================== -->
+  <meta property="og:locale" content="ar_YE">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="واحة الجبري | Heaven Al-Jabri - نظرية السندباد">
+  <meta property="og:title" content="واحة الجبري Z(x) = x⁵ ln(x) sin(2π/x) exp(-x/xp) - نظرية الجبري الموحدة">
+  <meta property="og:description" content="اشتقاق ثابت الجاذبية من الأعداد الصرفة (19, 137, 1836, 2464) بدقة 99.95% - Zx = Z + C + A - من صنعاء إلى الكون">
+  <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+  <meta property="og:image:secure_url" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="المهندس عبدالله الجبري - واحة الجبري ونظرية السندباد الموحدة">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:url" content="https://jabri-com.vercel.app/">
+  <meta property="og:updated_time" content="2026-08-16T18:20:00+03:00">
+  
+  <meta property="article:published_time" content="2026-01-01T00:00:00+03:00">
+  <meta property="article:modified_time" content="2026-08-16T18:20:00+03:00">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="نظرية السندباد">
+  <meta property="article:tag" content="الرياضيات">
+  <meta property="article:tag" content="الفيزياء">
+  <meta property="article:tag" content="تراث اليمن">
+  <meta property="article:author" content="https://jabri-com.vercel.app/about.html">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@JabriAbdulla1">
+  <meta name="twitter:creator" content="@JabriAbdulla1">
+  <meta name="twitter:title" content="واحة الجبري Z(x) - نظرية الجبري الموحدة">
+  <meta name="twitter:description" content="Zx = Z + C + A | Z + C + A = 1 - اشتقاق ثابت الجاذبية من الأعداد الصرفة - تراث اليمن">
+  <meta name="twitter:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+  <meta name="twitter:image:alt" content="المهندس عبدالله الجبري">
+  
+  <!-- ====================================================================== -->
+  <!-- 8. Facebook -->
+  <!-- ====================================================================== -->
+  <meta property="fb:app_id" content="123456789012345">
+  
+  <!-- ====================================================================== -->
+  <!-- 9. JSON-LD Schema.org كامل ومدمج -->
+  <!-- ====================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jabri-com.vercel.app/#person",
+        "name": "م/ عبدالله محمد ناصر الجبري",
+        "alternateName": ["Eng. Abdulla Mohammed Nasser Al-Jabri", "Heaven Al-Jabri", "واحة الجبري", "Abdulla Al-Jabri", "سندباد اليمن"],
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "ORCID",
+          "value": "0009-0003-3319-3822",
+          "url": "https://orcid.org/0009-0003-3319-3822"
+        },
+        "url": "https://jabri-com.vercel.app/ar/about.html",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "jobTitle": "باحث مستقل - رياضيات وفيزياء نظرية",
+        "description": "باحث يمني مستقل، مؤسس واحة الجبري. متخصص في الرياضيات النظرية والفيزياء النظرية، ومطور نظرية السندباد الموحدة Z والدالة الأم Z(x).",
+        "nationality": "Yemeni",
+        "email": "jabri62018@gmail.com",
+        "knowsAbout": ["الرياضيات النظرية","الفيزياء النظرية","نظرية السندباد الموحدة","واحة الجبري Z(x)","تراث اليمن","توثيق التراث الرقمي"],
+        "worksFor": { "@id": "https://jabri-com.vercel.app/#org" },
+        "sameAs": [
+          "https://orcid.org/0009-0003-3319-3822",
+          "https://github.com/jabri-web",
+          "https://en.wikipedia.org/wiki/User:Jabri2026",
+          "https://www.linkedin.com/in/abdulla-al-jabri",
+          "https://x.com/jabri_web",
+          "https://scholar.google.com/citations?user=jabri",
+          "https://www.researchgate.net/profile/Abdulla-Al-Jabri",
+          "https://www.youtube.com/@HeavenAlJabri",
+          "https://t.me/HeavenAlJabri"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://jabri-com.vercel.app/#org",
+        "name": "واحة الجبري",
+        "alternateName": "Heaven Al-Jabri",
+        "description": "منصة توثيق التراث اليمني ونظرية السندباد الموحدة - الدالة الأم Z(x)",
+        "url": "https://jabri-com.vercel.app/",
+        "logo": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "founder": { "@id": "https://jabri-com.vercel.app/#person" },
+        "owner": { "@id": "https://jabri-com.vercel.app/#person" },
+        "sameAs": [
+          "https://github.com/jabri-web",
+          "https://www.youtube.com/@HeavenAlJabri",
+          "https://t.me/HeavenAlJabri"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jabri-com.vercel.app/#website",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "واحة الجبري | Heaven Al-Jabr - نظرية السندباد",
+        "alternateName": "Heaven Al-Jabri",
+        "description": "الدالة الأم Z(x) ونظرية السندباد الموحدة Z+C+A=1 - اشتقاق ثابت الجاذبية من الأعداد الصرفة - تراث اليمن",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#org" },
+        "inLanguage": ["ar", "en"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://jabri-com.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jabri-com.vercel.app/#webpage",
+        "url": "https://jabri-com.vercel.app/",
+        "name": "الدالة الأم Z(x) - نظرية الجبري الموحدة",
+        "description": "اشتقاق ثابت الجاذبية من الأعداد الصرفة (19, 137, 1836, 2464) بدقة 99.95% - Zx = Z + C + A - من صنعاء إلى الكون",
+        "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
+        "about": { "@id": "https://jabri-com.vercel.app/#org" },
+        "primaryImageOfPage": "https://jabri-com.vercel.app/image/Jabri-photo.webp",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#org" },
+        "inLanguage": ["ar", "en"],
+        "breadcrumb": { "@id": "https://jabri-com.vercel.app/#breadcrumb" }
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/research.html/#article",
+        "name": "نظرية السندباد الموحدة Z+C+A=1",
+        "author": { "@id": "https://jabri-com.vercel.app/#person" },
+        "datePublished": "2026-01-01",
+        "dateModified": "2026-08-16",
+        "url": "https://jabri-com.vercel.app/research.html",
+        "description": "بحث في الرياضيات والفيزياء النظرية يقدم نظرية موحدة تربط بين دالة Zx ومسائل الألفية.",
+        "identifier": "10.5281/zenodo.20513840",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://jabri-com.vercel.app/#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/"},
+          {"@type": "ListItem", "position": 2, "name": "الدالة الأم", "item": "https://jabri-com.vercel.app/theory-ar.html"}
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://jabri-com.vercel.app/#cities-list",
+        "name": "المدن اليمنية التاريخية",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "صنعاء القديمة", "item": "https://jabri-com.vercel.app/Sanaa.html"},
+          {"@type": "ListItem", "position": 2, "name": "شبام حضرموت", "item": "https://jabri-com.vercel.app/Shibam.html"},
+          {"@type": "ListItem", "position": 3, "name": "سقطرى", "item": "https://jabri-com.vercel.app/Soqatra.html"}
+        ]
+      }
+    ]
+  }
+  </script>
+  
+  <!-- ====================================================================== -->
+  <!-- 10. الروابط المساعدة + Preload + Fonts -->
+  <!-- ====================================================================== -->
+  <link rel="home" href="https://jabri-com.vercel.app/">
+  <link rel="index" href="https://jabri-com.vercel.app/">
+  <link rel="contents" href="https://jabri-com.vercel.app/#webpage">
+  <link rel="section" href="https://jabri-com.vercel.app/research.html">
+  <link rel="section" href="https://jabri-com.vercel.app/about.html">
+  <link rel="section" href="https://jabri-com.vercel.app/Yemen-library.html">
+  <link rel="collection" href="https://jabri-com.vercel.app/Sanaa.html">
+  <link rel="collection" href="https://jabri-com.vercel.app/Shibam.html">
+  <link rel="collection" href="https://jabri-com.vercel.app/Soqatra.html">
+  
+  <link rel="preload" as="image" href="https://jabri-com.vercel.app/image/Jabri-photo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <!-- ============================================================ -->
-    <!-- 3. توجيه عناكب جوجل (فهرسة كاملة بدون منع كاش)               -->
-    <!-- ============================================================ -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot-news" content="index, follow" />
-    <meta name="revisit-after" content="7 days" />
 
-    <!-- ============================================================ -->
-    <!-- 4. العنوان والوصف (القوية عشان هزيمة جوجل)                   -->
-    <!-- ============================================================ -->
-    <title id="pageTitle">واحة الجبري | Heaven Al-Jabri – تراث اليمن ونظرية السندباد الموحدة</title>
-    <meta id="pageDescription" name="description" content="واحة الجبري - الباحث اليمني عبدالله محمد ناصر الجبري. توثيق تراث اليمن (صنعاء، شبام، سقطرى) ونظرية السندباد الموحدة Z+C+A=1 في الرياضيات والفيزياء." />
-    <meta name="keywords" content="عبدالله الجبري, واحة الجبري, الباحث اليمني, تراث اليمن, نظرية السندباد الموحدة, صنعاء, شبام, سقطرى, الرياضيات, الفيزياء" />
-    <meta name="author" content="م/ عبدالله محمد ناصر الجبري | Eng. Abdulla Mohammed Nasser Al-Jabri" />
-    <link rel="author" href="https://jabri-com.vercel.app/about.html" />
 
-    <!-- ============================================================ -->
-    <!-- 5. Dublin Core (مع DOI الأكاديمي عشان جوجل سكولار)           -->
-    <!-- ============================================================ -->
-    <meta name="DC.title" content="واحة الجبري | Heaven Al-Jabri" />
-    <meta name="DC.creator" content="م/ عبدالله محمد ناصر الجبري" />
-    <meta name="DC.subject" content="تراث اليمن, الرياضيات, الفيزياء النظرية" />
-    <meta name="DC.description" content="منصة الباحث اليمني عبدالله الجبري - تراث اليمن ونظرية السندباد" />
-    <meta name="DC.publisher" content="واحة الجبري" />
-    <meta name="DC.date" content="2026-08-09" />
-    <meta name="DC.type" content="Text" />
-    <meta name="DC.format" content="text/html" />
-    <meta name="DC.language" content="ar" />
-    <meta name="DC.coverage" content="Yemen" />
-    <meta name="DC.rights" content="© 2026 م/ عبدالله محمد ناصر الجبري" />
-    <meta name="DC.identifier" content="10.5281/zenodo.20513840" />
+  <!-- ====================================================================== -->
+  <!-- 11. Styles -->
+  <!-- ====================================================================== -->
 
-    <!-- ============================================================ -->
-    <!-- 6. ملكية جوجل (Search Console)                                -->
-    <!-- ============================================================ -->
-    <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cairo', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; padding: 20px; user-select: none; -webkit-user-select: none; }
 
-    <!-- ============================================================ -->
-    <!-- 7. Open Graph (فيسبوك + لينكد إن)                            -->
-    <!-- ============================================================ -->
-    <meta property="og:locale" content="ar_YE" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="واحة الجبري | Heaven Al-Jabri" />
-    <meta property="og:title" id="ogTitle" content="واحة الجبري | Heaven Al-Jabri - تراث اليمن ونظرية السندباد" />
-    <meta property="og:description" id="ogDescription" content="باحث يمني في الرياضيات والفيزياء النظرية + توثيق التراث اليمني صنعاء شبام سقطرى + نظرية السندباد الموحدة." />
-    <meta property="og:image" id="ogImage" content="https://jabri-com.vercel.app/image/Jabri-photo.png" />
-    <meta property="og:image:secure_url" id="ogImageSecure" content="https://jabri-com.vercel.app/image/Jabri-photo.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="صورة الباحث اليمني عبدالله الجبري - واحة الجبري" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:url" id="ogUrl" content="https://jabri-com.vercel.app/" />
-    <meta property="og:updated_time" content="2026-08-09T18:20:00+03:00" />
+    .top-header-buttons {
+        position: fixed; top: 15px; left: 0; right: 0; z-index: 99999;
+        display: flex; justify-content: space-between; align-items: center; gap: 10px;
+        padding: 0 20px; pointer-events: none;
+    }
+    .top-header-buttons > * { pointer-events: auto; }
+    .top-btn {
+        background: linear-gradient(135deg, #ffd700, #f0a500) !important;
+        color: #0a0a0f !important; border: 2px solid #ffd700 !important;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+        border-radius: 30px !important; font-weight: 900 !important;
+        cursor: pointer; font-family: 'Cairo', sans-serif;
+        display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        height: 44px; font-size: 13px; padding: 0 16px;
+        transition: all 0.3s ease !important; text-decoration: none;
+    }
+    .top-btn:hover { transform: scale(1.08) !important; box-shadow: 0 0 40px rgba(255, 215, 0, 0.8) !important; }
+    .top-btn.menu { width: 44px; padding: 0; font-size: 18px; }
+    .top-btn.lang { width: auto; min-width: 60px; padding: 0 14px; font-size: 12px; }
 
-    <!-- ============================================================ -->
-    <!-- 8. Open Graph Article (للمقالات العلمية)                     -->
-    <!-- ============================================================ -->
-    <meta property="article:published_time" content="2026-01-01T00:00:00+03:00" />
-    <meta property="article:modified_time" content="2026-08-09T18:20:00+03:00" />
-    <meta property="article:section" content="Research" />
-    <meta property="article:tag" content="نظرية السندباد" />
-    <meta property="article:tag" content="الرياضيات" />
-    <meta property="article:tag" content="الفيزياء" />
-    <meta property="article:tag" content="تراث اليمن" />
-    <meta property="article:author" content="https://jabri-com.vercel.app/about.html" />
+    .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99997; display: none; backdrop-filter: blur(4px); }
+    .menu-overlay.active { display: block; }
+    .side-menu { position: fixed; top: 0; right: -400px; width: 350px; max-width: 85vw; height: 100vh; background: linear-gradient(180deg, #0a0a0f, #1a1a2e); border-left: 2px solid #ffd700; z-index: 99998; padding: 80px 25px 30px; overflow-y: auto; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: -10px 0 40px rgba(0,0,0,0.8); }
+    .side-menu.open { right: 0; }
+    .menu-close { position: absolute; top: 20px; left: 20px; background: none; border: 2px solid #ffd700; color: #ffd700; border-radius: 50%; width: 44px; height: 44px; font-size: 22px; cursor: pointer; }
+    .menu-title { text-align: center; font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, #ffd700, #6ae3ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid rgba(255,215,0,0.2); }
+    .menu-btn { display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 18px; margin-bottom: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.15); border-radius: 12px; color: #fff; font-size: 1rem; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.3s ease; text-decoration: none; text-align: right; }
+    .menu-btn:hover { background: rgba(255,215,0,0.15); border-color: #ffd700; transform: translateX(-5px); }
+    .menu-btn .icon { font-size: 1.5rem; width: 36px; text-align: center; }
+    .menu-btn .badge-new { background: #00ff88; color: #0a0a0f; padding: 2px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 900; animation: pulse-badge 2s ease-in-out infinite; }
+    @keyframes pulse-badge { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-    <!-- ============================================================ -->
-    <!-- 9. تويتر / X (بطاقة ضخمة)                                    -->
-    <!-- ============================================================ -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@JabriAbdulla1" />
-    <meta name="twitter:creator" content="@JabriAbdulla1" />
-    <meta name="twitter:title" id="twitterTitle" content="واحة الجبري | Heaven Al-Jabri - تراث اليمن" />
-    <meta name="twitter:description" id="twitterDescription" content="باحث يمني - تراث اليمن العريق - نظرية السندباد الموحدة" />
-    <meta name="twitter:image" id="twitterImage" content="https://jabri-com.vercel.app/image/Jabri-photo.png" />
-    <meta name="twitter:image:alt" content="صورة الباحث اليمني عبدالله الجبري - واحة الجبري" />
+    .bottom-buttons {
+        position: fixed; bottom: 28px; left: 28px; z-index: 9999;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 12px; direction: ltr;
+    }
+    .bottom-btn {
+        background: linear-gradient(135deg, #ffd700, #f0a500) !important;
+        color: #0a0a0f !important; border: 2px solid #ffd700 !important;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+        border-radius: 30px !important; font-weight: 900 !important;
+        font-family: 'Cairo', sans-serif; cursor: pointer;
+        text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+        gap: 10px; padding: 0 22px; font-size: 16px; height: 50px;
+        min-width: 120px; transition: all 0.3s ease !important; backdrop-filter: blur(4px);
+        white-space: nowrap;
+    }
+    .bottom-btn:hover { transform: scale(1.07) !important; box-shadow: 0 0 40px rgba(255, 215, 0, 0.8) !important; }
+    .bottom-btn.music { font-size: 20px; min-width: 60px; padding: 0 18px; }
+    .bottom-btn.music.playing { background: linear-gradient(135deg, #ff6a6a, #cb3b3b) !important; color: #fff !important; border-color: #ff6a6a !important; box-shadow: 0 0 20px rgba(255, 106, 106, 0.4) !important; }
+    .bottom-btn .count { font-weight: 900; font-size: 18px; color: #0a0a0f; }
 
-    <!-- ============================================================ -->
-    <!-- 10. JSON-LD : صندوق البحث + الهوية الكاملة (درع جوجل)       -->
-    <!-- ============================================================ -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@graph": [{
-                "@type": "Person",
-                "@id": "https://jabri-com.vercel.app/#person",
-                "name": "م/ عبدالله محمد ناصر الجبري",
-                "alternateName": ["Eng. Abdulla Mohammed Nasser Al-Jabri", "Heaven Al-Jabri", "واحة الجبري", "Abdulla Al-Jabri", "سندباد اليمن"],
-                "identifier": {
-                    "@type": "PropertyValue",
-                    "propertyID": "ORCID",
-                    "value": "0009-0003-3319-3822",
-                    "url": "https://orcid.org/0009-0003-3319-3822"
-                },
-                "url": "https://jabri-com.vercel.app/",
-                "image": {
-                    "@type": "ImageObject",
-                    "url": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-                    "width": 1200,
-                    "height": 630
-                },
-                "jobTitle": ["باحث مستقل", "مؤسس واحة الجبري"],
-                "nationality": { "@type": "Country", "name": "Yemen" },
-                "email": "mailto:jabri62018@gmail.com",
-                "owns": { "@id": "https://jabri-com.vercel.app/#org" },
-                "founderOf": { "@id": "https://jabri-com.vercel.app/#org" },
-                "sameAs": [
-                    "https://orcid.org/0009-0003-3319-3822",
-                    "https://github.com/jabri-web",
-                    "https://en.wikipedia.org/wiki/User:Jabri2026",
-                    "https://www.linkedin.com/in/abdulla-al-jabri",
-                    "https://x.com/jabri_web",
-                    "https://scholar.google.com/citations?user=jabri",
-                    "https://www.researchgate.net/profile/Abdulla-Al-Jabri",
-                    "https://www.youtube.com/@HeavenAlJabri",
-                    "https://facebook.com/HeavenAlJabri",
-                    "https://instagram.com/heaven_aljabri",
-                    "https://t.me/HeavenAlJabri",
-                    "https://www.kaggle.com/jabriweb",
-                    "https://stackoverflow.com/users/jabri",
-                    "https://dev.to/jabriweb",
-                    "https://medium.com/@jabri62018",
-                    "https://www.producthunt.com/@jabri",
-                    "https://www.behance.net/jabri",
-                    "https://dribbble.com/jabri",
-                    "https://codepen.io/jabri-web",
-                    "https://gitlab.com/jabri-web",
-                    "https://bitbucket.org/jabri-web",
-                    "https://huggingface.co/jabri",
-                    "https://www.slideshare.net/jabri",
-                    "https://soundcloud.com/heavenaljabri",
-                    "https://vimeo.com/jabri",
-                    "https://zenodo.org/records/20513840"
-                ]
-            }, {
-                "@type": "Organization",
-                "@id": "https://jabri-com.vercel.app/#org",
-                "name": "واحة الجبري",
-                "alternateName": "Heaven Al-Jabri",
-                "description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية",
-                "url": "https://jabri-com.vercel.app/",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-                    "width": 512,
-                    "height": 512
-                },
-                "founder": { "@id": "https://jabri-com.vercel.app/#person" },
-                "owner": { "@id": "https://jabri-com.vercel.app/#person" },
-                "publisher": { "@id": "https://jabri-com.vercel.app/#person" },
-                "sameAs": [
-                    "https://github.com/jabri-web",
-                    "https://www.linkedin.com/company/jabri",
-                    "https://www.youtube.com/@HeavenAlJabri"
-                ]
-            }, {
-                "@type": "WebSite",
-                "@id": "https://jabri-com.vercel.app/#website",
-                "url": "https://jabri-com.vercel.app/",
-                "name": "واحة الجبري | Heaven Al-Jabri",
-                "alternateName": "Sindbad Yemen",
-                "description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية",
-                "publisher": { "@id": "https://jabri-com.vercel.app/#org" },
-                "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#person" },
-                "inLanguage": ["ar", "en"],
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://jabri-com.vercel.app/search?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                }
-            }, {
-                "@type": "WebPage",
-                "@id": "https://jabri-com.vercel.app/#webpage",
-                "url": "https://jabri-com.vercel.app/",
-                "name": "واحة الجبري | Heaven Al-Jabri",
-                "description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية",
-                "isPartOf": { "@id": "https://jabri-com.vercel.app/#website" },
-                "about": { "@id": "https://jabri-com.vercel.app/#org" },
-                "primaryImageOfPage": {
-                    "@type": "ImageObject",
-                    "url": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-                    "width": 1200,
-                    "height": 630
-                },
-                "thumbnailUrl": "https://jabri-com.vercel.app/image/Jabri-photo.png",
-                "publisher": { "@id": "https://jabri-com.vercel.app/#org" },
-                "copyrightHolder": { "@id": "https://jabri-com.vercel.app/#person" },
-                "inLanguage": ["ar", "en"],
-                "breadcrumb": { "@id": "https://jabri-com.vercel.app/#breadcrumb" }
-            }, {
-                "@type": "BreadcrumbList",
-                "@id": "https://jabri-com.vercel.app/#breadcrumb",
-                "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://jabri-com.vercel.app/" },
-                    { "@type": "ListItem", "position": 2, "name": "واحة الجبري", "item": "https://jabri-com.vercel.app/" }
-                ]
-            }]
-        }
-    </script>
-
-    <!-- ============================================================ -->
-    <!-- 11. Preload (للخطوط فقط - تم حذف preload الصورة عشان التحذير) -->
-    <!-- ============================================================ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
-
-    <!-- ============================================================ -->
-    <!-- 12. الاستايل النهائي للأزرار الثابتة (زجاجية + متجاوبة)      -->
-    <!-- ============================================================ -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #0a0a0f;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-        }
-
-        /* محتوى تجريبي في المنتصف عشان متشوفش شاشة سوداء */
-        .hero {
-            text-align: center;
-            padding: 20px;
-            max-width: 600px;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #6ae3ff, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            opacity: 0.6;
-            font-size: 1.1rem;
-        }
-
-        /* ========== الأزرار الثابتة في أسفل يسار الشاشة ========== */
-        .btn-container {
-            position: fixed;
-            bottom: 28px;
-            left: 28px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
-            direction: ltr;
-        }
-
-        .top-btn {
-            height: 56px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 26px;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            min-width: 130px;
-            white-space: nowrap;
-            user-select: none;
-            border: 2px solid transparent;
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-        }
-        .top-btn:hover {
-            transform: scale(1.07);
-            opacity: 0.9;
-        }
-
-        /* زر الموسيقى (تشغيل/إيقاف) */
-        .music-btn {
-            background: rgba(106, 227, 255, 0.18);
-            color: #6ae3ff;
-            border-color: rgba(106, 227, 255, 0.25);
-            font-size: 22px;
-            animation: pulse 2s infinite;
-        }
-        .music-btn:hover {
-            background: rgba(106, 227, 255, 0.32);
-        }
-        .music-btn.playing {
-            background: rgba(255, 106, 106, 0.22);
-            color: #ff6a6a;
-            border-color: rgba(255, 106, 106, 0.35);
-            animation: none;
-        }
-
-        /* زر رابط الموسيقى */
-        .music-link-btn {
-            background: rgba(255, 200, 100, 0.15);
-            color: #ffc864;
-            border-color: rgba(255, 200, 100, 0.2);
-            font-size: 17px;
-        }
-        .music-link-btn:hover {
-            background: rgba(255, 200, 100, 0.28);
-        }
-
-        /* زر الزوار */
-        .visitor-btn {
-            background: rgba(106, 255, 181, 0.15);
-            color: #6affb5;
-            border-color: rgba(106, 255, 181, 0.2);
-            font-size: 17px;
-        }
-        .visitor-btn:hover {
-            background: rgba(106, 255, 181, 0.28);
-        }
-        #visitorCount {
-            font-size: 22px;
-            font-weight: 900;
-            color: #6affb5;
-            min-width: 34px;
-            text-align: center;
-            display: inline-block;
-        }
-
-        /* زر اللغة (الساحر) */
-        .lang-btn {
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
-            border-color: rgba(255, 215, 0, 0.2);
-            font-size: 17px;
-        }
-        .lang-btn:hover {
-            background: rgba(255, 215, 0, 0.28);
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(106, 227, 255, 0.35);
-            }
-            70% {
-                box-shadow: 0 0 0 18px rgba(106, 227, 255, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(106, 227, 255, 0);
-            }
-        }
-
-        /* استجابة للموبايل */
-        @media (max-width: 600px) {
-            .btn-container {
-                bottom: 18px;
-                left: 18px;
-                gap: 12px;
-            }
-            .top-btn {
-                height: 48px;
-                font-size: 15px;
-                padding: 0 18px;
-                min-width: 100px;
-            }
-            .music-btn {
-                font-size: 19px;
-            }
-            #visitorCount {
-                font-size: 19px;
-                min-width: 28px;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-        }
-        @media (max-width: 400px) {
-            .btn-container {
-                bottom: 14px;
-                left: 14px;
-                gap: 10px;
-            }
-            .top-btn {
-                height: 42px;
-                font-size: 13px;
-                padding: 0 14px;
-                min-width: 80px;
-            }
-            .music-btn {
-                font-size: 17px;
-            }
-            #visitorCount {
-                font-size: 17px;
-                min-width: 24px;
-            }
-        }
-    </style>
+    @media (max-width: 600px) {
+        .top-header-buttons { padding: 0 10px; }
+        .top-btn { height: 38px; }
+        .top-btn.lang { min-width: 70px; padding: 0 12px; font-size: 11px; }
+        .top-btn.menu { width: 40px; font-size: 17px; }
+        .bottom-buttons { bottom: 18px; left: 18px; gap: 10px; }
+        .bottom-btn { height: 44px; font-size: 14px; padding: 0 16px; min-width: 100px; }
+        .bottom-btn.music { font-size: 17px; min-width: 60px; padding: 0 14px; }
+    }
+    @media (max-width: 400px) {
+        .top-btn { height: 34px; }
+        .top-btn.lang { min-width: 70px; padding: 0 8px; font-size: 10px; }
+        .top-btn.menu { width: 36px; font-size: 15px; }
+        .bottom-buttons { bottom: 14px; left: 14px; gap: 8px; }
+        .bottom-btn { height: 38px; font-size: 12px; padding: 0 12px; min-width: 100px; }
+        .bottom-btn.music { font-size: 15px; min-width: 60px; padding: 0 10px; }
+    }
+  </style>
 </head>
+
+
+
 <body>
 
-    <!-- ============================================================ -->
-    <!-- محتوى تجريبي في وسط الشاشة (عشان تبان إنها مش سوداء)         -->
-    <!-- ============================================================ -->
-    <div class="hero">
-        <h1>🌊 واحة الجبري</h1>
-        <p>تراث اليمن العريق ونظرية السندباد الموحدة</p>
-        <p style="font-size:0.8rem; margin-top:20px; opacity:0.4;">الأزرار في الزاوية اليسرى السفلية 👇</p>
+  <div class="top-header-buttons">
+    <div style="display:flex; gap:8px;">
+      <button class="top-btn menu" onclick="window.toggleMenu()" title="القائمة">☰</button>
+      <button class="top-btn lang" onclick="window.toggleLang()" title="تبديل اللغة">
+        <span class="en">🇾🇪 عربي</span>
+        <span class="ar">🇬🇧 EN</span>
+      </button>
     </div>
+    <div style="display:flex; gap:8px;"></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- الأزرار الثابتة – 4 أزرار في أسفل يسار الشاشة               -->
-    <!-- ============================================================ -->
-    <div class="btn-container">
+  <div class="menu-overlay" id="menuOverlay" onclick="window.closeMenu()"></div>
+  <div class="side-menu" id="sideMenu">
+    <button class="menu-close" onclick="window.closeMenu()">✕</button>
+    <div class="menu-title">🌊 واحة الجبري</div>
+    <a href="/" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🏠</span> الرئيسية</a>
+    
+    <a href="/about-waha.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن واحة الجبري</a>
 
-        <!-- 1. زر تشغيل/إيقاف الموسيقى -->
-        <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
-            <source src="/image/music.mp3" type="audio/mpeg">
-        </audio>
-        <button id="musicToggleBtn" class="top-btn music-btn" title="تشغيل / إيقاف الموسيقى">🎵</button>
 
-        <!-- 2. زر رابط صفحة الموسيقى -->
-        <a href="/music.html" class="top-btn music-link-btn" title="الموسيقى">
-            👀 <span id="musicLinkText">موسيقى</span>
-        </a>
+    <a href="/heaven-info.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن الواحة</a>
 
-        <!-- 3. زر الزوار + العداد -->
-        <a href="/visitor.html" class="top-btn visitor-btn" title="زوار">
-            ♻️ <span id="visitorText">زوار</span>
-            <span id="visitorCount">1</span>
-        </a>
 
-        <!-- 4. زر اللغة (الساحر) -->
-        <button id="langBtn" class="top-btn lang-btn" title="تبديل اللغة">🇾🇪 عربي</button>
 
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- السكربتات السحرية (الموسيقى، العداد، اللغة المتقدمة)        -->
-    <!-- ============================================================ -->
+    <a href="/about.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> عن الباحث</a>
+    
+    <a href="/Author-cv.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> سيرة الباحث</a>
+    
+      <a href="https://wikibin.org/articles/abdulla-mohammed-nasser-al-jabri.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👤</span> ويكيبيديا</a>
+    
+    <a href="/Sindbad-theory.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">📐</span> نظرية السندباد</a>
+    <a href="/theory-ar.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🧮</span> الدالة الأم Z(x)</a>
+    <a href="/Sanaa.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🏛️</span> صنعاء القديمة</a>
+    <a href="/Shibam.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🏗️</span> شبام حضرموت</a>
+    <a href="/Soqatra.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🌴</span> سقطرى</a>
+    <a href="/journal3.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🌍</span> رسالة إلى العالم</a>
+    <a href="/music.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🎵</span> الموسيقى</a>
+    <a href="/visitor.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">👥</span> الزوار</a>
+    <hr style="border-color: rgba(255,215,0,0.2); margin: 15px 0;">
+    <div style="color:#00ff88; font-size:0.7rem; font-weight:700; letter-spacing:1px; margin-bottom:8px; padding-right:14px;">⚡ تطبيقات جديدة</div>
+    <a href="../game/game-auto.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">🎮</span> مركز الألعاب <span class="badge-new">🆕</span></a>
+    <a href="../publish/publish-auto.html" class="menu-btn" onclick="window.closeMenu()"><span class="icon">📤</span> المنشورات <span class="badge-new">🆕</span></a>
+    <hr style="border-color: rgba(255,215,0,0.2); margin: 15px 0;">
+    <a href="https://github.com/jabri-web" target="_blank" class="menu-btn"><span class="icon">🐙</span> GitHub</a>
+    <a href="https://x.com/JabriAbdulla1" target="_blank" class="menu-btn"><span class="icon">🐦</span> X</a>
+    <a href="https://www.youtube.com/@HeavenAlJabri" target="_blank" class="menu-btn"><span class="icon">▶️</span> YouTube</a>
+    <a href="https://orcid.org/0009-0003-3319-3822" target="_blank" class="menu-btn"><span class="icon">🔬</span> ORCID</a>
+    <hr style="border-color: rgba(255,215,0,0.2); margin: 15px 0;">
+    <button class="menu-btn" onclick="window.toggleLang(); window.closeMenu();"><span class="icon">🌐</span> تبديل اللغة</button>
+    <button class="menu-btn" onclick="window.toggleMusic(); window.closeMenu();"><span class="icon">🎵</span> الموسيقى</button>
+  </div>
+
+  <div class="bottom-buttons">
+    <button class="bottom-btn music" id="musicBottomBtn" onclick="window.toggleMusic()">🎵</button>
+    <a href="/music.html" class="bottom-btn music-link">👀 🎵</a>
+    <a href="/visitor.html" class="bottom-btn visitor">
+      <span id="visitorText">👥 الزوار</span>
+      <span class="count" id="visitorCountBottom">1</span>
+    </a>
+    <button class="bottom-btn lang" id="langBottomBtn" onclick="window.toggleLang()">
+      <span class="ar">🇾🇪 عربي</span>
+      <span class="en">🇬🇧 EN</span>
+    </button>
+    <button class="bottom-btn chat" onclick="window.toggleChat()">💬 محادثة</button>
+  </div>
+
+  <!-- عنصر الصوت -->
+  <audio id="oasisMusic" loop preload="auto">
+    <source src="/image/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // ===== دوال النوافذ العامة =====
+    window.toggleLang = function() {
+      const current = document.body.classList.contains('en') ? 'en' : 'ar';
+      const next = current === 'ar' ? 'en' : 'ar';
+      document.body.classList.toggle('en', next === 'en');
+      document.documentElement.dir = next === 'en' ? 'ltr' : 'rtl';
+      document.documentElement.lang = next === 'en' ? 'en' : 'ar';
+      localStorage.setItem('lang', next);
+      const langTop = document.getElementById('langTopBtn');
+      const langBottom = document.getElementById('langBottomBtn');
+      if (langTop) langTop.innerHTML = next === 'en' ? '<span class="ar">🇾🇪 عربي</span><span class="en">🇬🇧 EN</span>' : '<span class="ar">🇾🇪 عربي</span><span class="en">🇬🇧 EN</span>';
+      if (langBottom) langBottom.innerHTML = next === 'en' ? '<span class="ar">🇾🇪 عربي</span><span class="en">🇬🇧 EN</span>' : '<span class="ar">🇾🇪 عربي</span><span class="en">🇬🇧 EN</span>';
+    };
+
+    window.toggleMusic = function() {
+      const audio = document.getElementById('oasisMusic');
+      if (!audio) return;
+      const btns = document.querySelectorAll('.bottom-btn.music, .menu-btn [onclick*="toggleMusic"]');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+        btns.forEach(b => { if (b) { b.textContent = '🔊'; b.classList.add('playing'); } });
+        document.getElementById('musicBottomBtn').textContent = '🔊';
+        document.getElementById('musicBottomBtn').classList.add('playing');
+      } else {
+        audio.pause();
+        btns.forEach(b => { if (b) { b.textContent = '🎵'; b.classList.remove('playing'); } });
+        document.getElementById('musicBottomBtn').textContent = '🎵';
+        document.getElementById('musicBottomBtn').classList.remove('playing');
+      }
+    };
+
+    window.toggleChat = function() {
+      alert('💬 المحادثة قيد التطوير... قريباً بإذن الله!\n\n📧 للتواصل: jabri62018@gmail.com');
+    };
+
+    window.toggleMenu = function() {
+      const menu = document.getElementById('sideMenu');
+      const overlay = document.getElementById('menuOverlay');
+      if (menu && overlay) {
+        menu.classList.toggle('open');
+        overlay.classList.toggle('active');
+      }
+    };
+
+    window.closeMenu = function() {
+      const menu = document.getElementById('sideMenu');
+      const overlay = document.getElementById('menuOverlay');
+      if (menu) menu.classList.remove('open');
+      if (overlay) overlay.classList.remove('active');
+    };
+
+    window.updateVisitorCount = function() {
+      let count = parseInt(localStorage.getItem('jabri_visitor_count') || '0', 10);
+      count += 1;
+      localStorage.setItem('jabri_visitor_count', count);
+      const bottomEl = document.getElementById('visitorCountBottom');
+      if (bottomEl) bottomEl.textContent = count;
+    };
+
+    // ===== تشغيل الصوت تلقائياً بأول تفاعل =====
+    (function() {
+      const audio = document.getElementById('oasisMusic');
+      if (!audio) return;
+      let musicPlayed = false;
+
+      function playMusic() {
+        if (musicPlayed) return;
+        musicPlayed = true;
+        document.removeEventListener('click', playMusic);
+        document.removeEventListener('touchstart', playMusic);
+        
+        audio.volume = 1;
+        audio.play().then(() => {
+          const btn = document.getElementById('musicBottomBtn');
+          if (btn) { btn.textContent = '🔊'; btn.classList.add('playing'); }
+          console.log('🎵 تم تشغيل الموسيقى تلقائياً');
+        }).catch(err => {
+          musicPlayed = false;
+          console.log('لم يتم تشغيل الصوت تلقائياً:', err);
+        });
+      }
+
+      document.addEventListener('click', playMusic);
+      document.addEventListener('touchstart', playMusic);
+    })();
+
+    // ===== تهيئة اللغة وعدد الزوار =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('lang') || 'ar';
+      if (savedLang === 'en') {
+        document.body.classList.add('en');
+        document.documentElement.dir = 'ltr';
+        document.documentElement.lang = 'en';
+      } else {
+        document.body.classList.remove('en');
+        document.documentElement.dir = 'rtl';
+        document.documentElement.lang = 'ar';
+      }
+      window.updateVisitorCount();
+      console.log('🚀 واحة الجبري جاهزة');
+    });
+  </script>
+  
+  
     <script>
-        (function() {
-            const VERSION = '3.0.0';
-            if (localStorage.getItem('jabri_version') !== VERSION) {
-                localStorage.clear();
-                localStorage.setItem('jabri_version', VERSION);
-                console.log('🔄 نسخة الساحر ' + VERSION);
-            }
-        })();
+    // ===== تشغيل الصوت تلقائي بعد اول تفاعل =====
+    (function() {
+      const audio = document.getElementById('oasisMusic');
+      if (!audio) return;
 
-        // --------------------------------------------------------------
-        // 1. تشغيل / إيقاف الموسيقى (مع تذكر الحالة)
-        // --------------------------------------------------------------
-        (function initMusic() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicToggleBtn');
-            if (!music || !btn) return;
-            let isPlaying = false;
-            music.volume = 0.3;
+      let musicPlayed = false;
 
-            btn.addEventListener('click', function() {
-                if (isPlaying) {
-                    music.pause();
-                    this.innerHTML = '🎵';
-                    this.classList.remove('playing');
-                    isPlaying = false;
-                    localStorage.setItem('jabri_music_state', 'paused');
-                } else {
-                    music.play().then(() => {
-                        this.innerHTML = '🔇';
-                        this.classList.add('playing');
-                        isPlaying = true;
-                        localStorage.setItem('jabri_music_state', 'playing');
-                    }).catch(function() {
-                        document.addEventListener('click', function playOnClick() {
-                            music.play().then(() => {
-                                btn.innerHTML = '🔇';
-                                btn.classList.add('playing');
-                                isPlaying = true;
-                                localStorage.setItem('jabri_music_state', 'playing');
-                            }).catch(function() {});
-                            document.removeEventListener('click', playOnClick);
-                        }, { once: true });
-                    });
-                }
+      function playMusic() {
+        if (musicPlayed) return;
+        musicPlayed = true;
+        
+        document.removeEventListener('click', playMusic);
+        document.removeEventListener('touchstart', playMusic);
+        
+        audio.volume = 1;
+        audio.play().then(() => {
+          document.querySelectorAll('#musicTopBtn, #musicBottomBtn').forEach(b => {
+            if (b) { b.textContent = '🔊'; b.classList.add('playing'); }
+          });
+          console.log('🎵 تم تشغيل الموسيقى تلقائياً');
+        }).catch(err => {
+          musicPlayed = false;
+          console.log('لم يتم تشغيل الصوت تلقائياً:', err);
+        });
+      }
+
+      document.addEventListener('click', playMusic);
+      document.addEventListener('touchstart', playMusic);
+
+      window.toggleMusic = function() {
+        if (!audio) return;
+        const btns = document.querySelectorAll('#musicTopBtn, #musicBottomBtn');
+        if (audio.paused) {
+          audio.play().then(() => {
+            btns.forEach(b => { 
+              if (b) { b.textContent = '🔊'; b.classList.add('playing'); }
             });
+            musicPlayed = true;
+          }).catch(() => {});
+        } else {
+          audio.pause();
+          btns.forEach(b => { 
+            if (b) { b.textContent = '🎵'; b.classList.remove('playing'); }
+          });
+        }
+      };
+    })();
+  </script>
+  
 
-            setTimeout(function() {
-                if (localStorage.getItem('jabri_music_state') === 'playing') {
-                    music.play().then(() => {
-                        btn.innerHTML = '🔇';
-                        btn.classList.add('playing');
-                        isPlaying = true;
-                    }).catch(function() {});
-                }
-            }, 500);
-        })();
-
-        // --------------------------------------------------------------
-        // 2. عداد الزوار (متقدم)
-        // --------------------------------------------------------------
-        (function initCounter() {
-            let count = parseInt(localStorage.getItem('jabri_visitor_count') || '0', 10);
-            count += 1;
-            localStorage.setItem('jabri_visitor_count', count);
-            const display = document.getElementById('visitorCount');
-            if (display) display.innerText = count.toLocaleString('ar-EG');
-        })();
-
-        // --------------------------------------------------------------
-        // 3. الساحر الحقيقي: تبديل اللغة مع الانتقال بين / و /en/
-        // --------------------------------------------------------------
-        (function magicTranslator() {
-            const btn = document.getElementById('langBtn');
-            const musicLinkText = document.getElementById('musicLinkText');
-            const visitorText = document.getElementById('visitorText');
-            if (!btn) return;
-
-            // دالة تحديث نصوص الواجهة (بدون تغيير المسار)
-            function updateUIText() {
-                const isEnglish = window.location.pathname.startsWith('/en/') || window.location.pathname === '/en';
-                // تحديث زر اللغة
-                btn.textContent = isEnglish ? '🇾🇪 عربي' : '🇬🇧 English';
-                // تحديث نص "موسيقى"
-                if (musicLinkText) {
-                    musicLinkText.innerText = isEnglish ? 'Music' : 'موسيقى';
-                }
-                // تحديث نص "زوار"
-                if (visitorText) {
-                    visitorText.innerText = isEnglish ? 'Visitors' : 'زوار';
-                }
-                // تحديث اتجاه الصفحة ولغتها (بدون إعادة تحميل)
-                document.documentElement.lang = isEnglish ? 'en' : 'ar';
-                document.documentElement.dir = isEnglish ? 'ltr' : 'rtl';
-            }
-
-            // دالة الانتقال بين النسختين (السحر الحقيقي)
-            function switchLanguage() {
-                const currentPath = window.location.pathname; // مثال: /page7  أو  /en/page7
-                const isEnglish = currentPath.startsWith('/en/') || currentPath === '/en';
-
-                let newPath;
-                if (isEnglish) {
-                    // نزيل /en/ من البداية (نرجع للعربية)
-                    newPath = currentPath.replace(/^\/en/, '') || '/';
-                } else {
-                    // نضيف /en/ في البداية (نروح للإنجليزية)
-                    newPath = currentPath === '/' ? '/en/' : `/en${currentPath}`;
-                }
-                // نحافظ على الـ query string و الـ hash
-                const query = window.location.search;
-                const hash = window.location.hash;
-                window.location.href = newPath + query + hash;
-            }
-
-            // ربط الحدث بالزر
-            btn.addEventListener('click', switchLanguage);
-
-            // تحديث النصوص عند تحميل الصفحة
-            updateUIText();
-
-            // أيضاً حدث popstate عشان لو المستخدم رجع بالأسهم
-            window.addEventListener('popstate', updateUIText);
-
-            console.log('🧙‍♂️ الساحر جاهز! زر اللغة ينقل بين / و /en/ بسلاسة');
-        })();
-
-        console.log('✅ الهيدر الكامل جاهز - الأزرار في الزاوية اليسرى السفلية');
-    </script>
-
+  
+  
+  
+  <div id="header-placeholder"></div>
+  <div id="footer-placeholder"></div>
+  
+  <script src="/js/init-page-root.js"></script>
+  <script src="/js/menu.js"></script>
 </body>
 </html>
